@@ -278,7 +278,7 @@ def action_run_code(code_type: str, code: str, timeout: float = 30.0) -> str:
     
     return result_str or "No output, errors, or return value."
 
-import Gödel_Agent.src.task_mgsm as task_mgsm
+import task_mgsm as task_mgsm
 def solver(agent, task: str):
     messages = [{"role": "user", "content": f"# Your Task:\n{task}"}]
     response = agent.action_call_json_format_llm(
@@ -313,14 +313,11 @@ def action_evaluate_on_task(task, solver):
     return feedback
 
 class Agent(AgentBase):
-    def __init__(agent, api_key=None, goal_prompt_path='goal_prompt.md', key_path='key.env'):
+    def __init__(agent, goal_prompt_path='goal_prompt.md'):
         # Load configurations
         agent.goal_prompt = open(goal_prompt_path, 'r').read()
         agent.goal_task = task_mgsm.MGSM_Task()
-        if api_key is None:
-            api_key = open(key_path, 'r').read().strip()
-        openai.api_key = api_key
-        agent.client = openai.OpenAI(api_key=api_key)
+        agent.client = openai.OpenAI(api_key='ollama', base_url="http://localhost:11434/v1")
 
         # Initialize optimization history and iterations
 
@@ -614,6 +611,7 @@ class Agent(AgentBase):
                     *agent.optimize_history]
         try:
             response = agent.action_call_llm(messages=messages, model="gpt-4o", response_format="text", tools=agent.action_functions, tool_choice="required")
+            print(response)
         except Exception as e:
             print(repr(e))
             for message in messages:

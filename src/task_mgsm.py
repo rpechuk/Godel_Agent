@@ -14,7 +14,7 @@ Example = namedtuple('Example', ['question', 'choice1', 'choice2', 'choice3', 'c
 threshold = 0.5
 last_test_acc = 0.
 
-client = OpenAI()
+# client = OpenAI()
 LANG_TO_INSTRUCTIONS = {
     "en": """Solve this math problem.
 
