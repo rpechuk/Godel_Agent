@@ -18,7 +18,7 @@ class CodeContext:
     embedding: Optional[List[float]] = None
 
 class StructuredRAG:
-    def __init__(self, base_path: str = "src"):
+    def __init__(self, base_path: str = "."):
         try:
             self.client = openai.OpenAI(api_key='ollama', base_url="http://localhost:11434/v1")
             # Test connection

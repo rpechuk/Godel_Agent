@@ -91,11 +91,11 @@ def main():
     print("\nTest 2: Context Retrieval")
     test_context_retrieval()
     
-    # print("\nTest 3: Query Augmentation")
-    # test_query_augmentation()
+    print("\nTest 3: Query Augmentation")
+    test_query_augmentation()
     
     # print("\nTest 4: Agent Integration")
-    test_agent_integration()
+    # test_agent_integration()
 
 if __name__ == "__main__":
     main() 
