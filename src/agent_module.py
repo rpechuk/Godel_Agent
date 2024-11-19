@@ -15,6 +15,7 @@ import contextlib
 import collections
 import openai
 import logic
+import pprint
 
 
 action_counter = collections.defaultdict(int)
@@ -526,6 +527,12 @@ class Agent(AgentBase):
         Executes the function called by the model and returns the result.
         """
         
+        if 'tool_calls' not in actions:
+            print("Agent Evolve - NO TOOLS CALLED :(", end="\n\n")
+            agent.optimize_history.append({"role": "user", "content": "Don't forget that you must have at least one tool call in your actions."})
+            agent.evolve()
+            return
+
         is_reinit = False
         for tool_call in actions['tool_calls']:
             print("tool call:", tool_call, end="\n\n")
@@ -596,7 +603,7 @@ class Agent(AgentBase):
         tool_call_ids = set()
         remain_optimize_history = []
         for message in agent.optimize_history[-10:]:
-            if message["role"] == "assistant" and message["tool_calls"]:
+            if message["role"] == "assistant" and 'tool_calls' in message:
                 tool_call_ids = set()
                 for tool_call in message["tool_calls"]:
                     tool_call_ids.add(tool_call["id"])
@@ -609,6 +616,11 @@ class Agent(AgentBase):
         messages = [{"role": "system", "name": "Principles", "content": agent.goal_prompt}, 
                     {"role": "system", "name": "Environment", "content": action_environment_aware(agent)},
                     *agent.optimize_history]
+
+        print("Messages:")
+        pprint.pp(messages[2:])
+        print("\n\n")
+
         try:
             response = agent.action_call_llm(messages=messages, model="gpt-4o", response_format="text", tools=agent.action_functions, tool_choice="required")
             print(response)
@@ -699,7 +711,7 @@ class Agent(AgentBase):
 
             if tools is not None:
                 kwargs["tools"] = tools
-                kwargs["tool_choice"] = tool_choice
+                # kwargs["tool_choice"] = tool_choice # NOTE: this does nothing with Ollama right now
 
             response = agent.client.chat.completions.create(**kwargs).to_dict() # to Python dictionary
             
