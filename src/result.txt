@@ -1,0 +1,182 @@
+`Valid Accuracy: `0.25
+Valid Accuracy less than 0.5, no testing needed.
+Evaluation Info:
+Valid Sample 0:
+解决这个数学问题。
+
+乔的万圣节糖果包里面有 25 根巧克力棒和 80 颗糖渍苹果。每根巧克力棒的重量是每颗糖渍苹果的两倍。如果每根巧克力棒重 40 克，乔的糖果包重多少克？
+Model Output: {'reasoning': ['首先，我们需要确定每个糖渍苹果的重量。由于每根巧克力棒的重量是每颗糖渍苹果的两倍，并且每根巧克力棒的重量为40克，根据此信息我们可以计算出每颗糖渍苹果的重量：40/2=20克。\n', '然后，我们通过将巧克力棒的数量（25）和糖渍苹果的数量（80）相加来得出总共有多少个零食：25+80=105\n', '最后，我们可以计算出乔的糖果包重量。由于每颗苹果的重量为20克，巧克力棒的重量为40克，将其相加可得出总重量：(24*20)+(1*40)=600克。\n'], 'answer': '600'}
+Model Answer: 600
+Correct Answer: 2600
+Is Correct: False
+
+Valid Sample 1:
+Résolvez ce problème de mathématiques.
+
+Marissa fait une randonnée sur un sentier d'une longueur de 12 miles. Elle a mis 1 heure pour parcourir les 4 premiers miles, puis une autre heure pour les deux miles suivants. Si elle veut que sa vitesse moyenne soit de 4 miles par heure, quelle vitesse (en miles par heure) doit-elle atteindre pour parcourir la distance restante ?
+Model Output: {'reasoning': ['Décomposons le problème en étapes.', 'Marissa a parcouru les 4 premiers miles en 1 hour et les 2 miles suivants en 1 heure, nous devons donc connaître la distance restante avant de pouvoir calculer sa vitesse moyenne actuelle.', 'La distance totale parcourue est de 12 milles, on a donc :', '12 - (4 + 2) = 6 milles restants à parcourir.'], 'answer': '10'}
+Model Answer: 10
+Correct Answer: 6
+Is Correct: False
+
+Valid Sample 2:
+Solve this math problem.
+
+Marilyn's first record sold 10 times as many copies as Harald's. If they sold 88,000 copies combined, how many copies did Harald sell?
+Model Output: {'reasoning': ["If Marilyn's record sold 10 times as many copies as Harald's, then we can represent the number of copies sold by Harald as 'x'. We know that Marilyn's record sold 10 times more copies than Harald's, so we can represent the number of copies sold by Marilyn as 10x. The total number of copies sold is given as 88,000, which is the sum of copies sold by Marilyn and Harald: 10x + x = 88,000.", "To solve for 'x', we need to combine like terms and isolate 'x'. Combining like terms gives us 11x = 88,000. Dividing both sides by 11 will give us the value of 'x'.", 'The number of copies sold by Harald (x) is an unknown variable that we want to solve for.', 'Solving the equation 11x = 88,000 gives x = 8000.'], 'answer': '8000'}
+Model Answer: 8000
+Correct Answer: 8000
+Is Correct: True
+
+Valid Sample 3:
+Résolvez ce problème de mathématiques.
+
+Gunter essaie de compter des bonbons dans un bocal. Il demande à ses amis d'en estimer la quantité. L'un d'eux répond 80. Un autre dit 20 de plus que la moitié du premier. Un troisième parle de 25 % de plus que le premier. Quelle est la moyenne de leurs estimations ?
+Model Output: {'reasoning': ['Décomposons les informations fournies dans le problème.', 'Le premier ami dit que le nombre de bonbons est de 80.', 'Le deuxième ami dit que le nombre de bonbons est de 20 de plus que la moitié du premier, ce qui signifie (80 / 2) + 20 = 60.', 'Le troisième ami dit que le nombre de bonbons est de 25 % de plus que le premier, soit 80 + (80 * 0,25) = 100.', 'Nous devons maintenant trouver la moyenne des estimations des trois amis.'], 'answer': '80'}
+Model Answer: 80
+Correct Answer: 80
+Is Correct: True
+
+Valid Sample 4:
+Solve this math problem.
+
+Terry eats 2 yogurts a day.  They are currently on sale at 4 yogurts for $5.00.  How much does he spend on yogurt over 30 days?
+Model Output: {'reasoning': 'To find out how much Terry spends on yogurt, first calculate the number of yogurts he eats in 30 days: 2 yogurts/day ᠼ 30 days = 60 yogurts. Then, divide the total number of yogurts by the number of yogurts per box (4) to find out how many boxes Terry needs: 60 yogurts / 4 yogurts/box = 15 boxes. Finally, multiply the number of boxes by the price per box ($5.00): 15 boxes ᠼ $5.00/box = $75.00', 'answer': '75'}
+Model Answer: 75
+Correct Answer: 75
+Is Correct: True
+
+Valid Sample 5:
+এই গণিতের সমস্যাটি সমাধান করুন।
+
+সু একটি মজাদার পাড়ায় থাকেন। এক সপ্তাহান্তে, প্রতিবেশীরা সু-এর সাথে মজা করবেন বলে ঠিক করেছিলেন। শুক্রবার সকালে, প্রতিবেশীরা সু-এর উঠানের সামনে 18টি গোলাপি প্লাস্টিকের ফ্লেমিংগো রাখেন। শনিবার সকালে, প্রতিবেশীরা ফ্লেমিংগোর এক তৃতীয়াংশ ফিরিয়ে নিয়ে, সেগুলিকে সাদা রঙ করে দিয়েছিলেন, এবং নতুনভাবে রঙ করা এই সাদা ফ্লেমিংগোগুলি সু-এর উঠানে রেখে এসেছিলেন। তারপর, রবিবার সকালে, তাঁদের সংগ্রহ থেকে অন্য আরও 18টি গোলাপি প্লাস্টিকের ফ্লেমিংগো যোগ করে দিয়েছিলেন। রবিবার দুপুরে, সাদা প্লাস্টিক ফ্লেমিংগোর থেকে গোলাপি প্লাস্টিক ফ্লেমিংগো আরও কতগুলি বেশী ছিল?
+Model Output: {'reasoning': 'এই সমস্যাটি সমাধান করার জন্য, আমাদের প্রথমে 18টি গোলাপি ফ্লেমিংগো এবং তারপর শনিবার ফিরিয়ে দেওয়া 18/3 = 6টি গোলাপি ফ্লেমিংগো একত্রে ভাগ করতে হবে। শনিবার, সু-এর উঠানে 18 - 6 = 12টি সাদা ফ্লেমিংগো ছিল। পরবর্তী আকর্ষণের পর, রবিবার জন্য 12 + 18 = 30টি ফ্লেমিংগো ছিল। শনিবার যখন সাদা হওয়ার পর, 6টি ফ্লেমিংগো আরও গোলাপি ছিল। সুতরাং, রবিবার 30 - 6 = 24টি গোলাপি ফ্লেমিংগো আরও ছিল।', 'answer': '6'}
+Model Answer: 6
+Correct Answer: 24
+Is Correct: False
+
+Valid Sample 6:
+এই গণিতের সমস্যাটি সমাধান করুন।
+
+জেনি তার মায়ের অফিসে সাহায্য করছে। তার কাছে 60টি চিঠির গোছা আছে যাতে স্ট্যাম্প লাগানোর প্রয়োজন আছে, এবং এক গোছা চিঠিতে ইতিমধ্যেই স্ট্যাম্প লাগানো হয়েছে। স্ট্যাম্প লাগানোর প্রয়োজন রয়েছে এরকম এক-তৃতীয়াংশ চিঠিতে সে স্ট্যাম্প লাগিয়েছে। ইতিমধ্যেই স্ট্যাম্প লাগানো চিঠির গোছার মধ্যে যদি এখন 30টি চিঠি থাকে, জেনি যখন শুরু করেছিল ঐ গোছায় তখন কতগুলি চিঠি ছিল?
+Model Output: {'reasoning': 'জেনি প্রাথমিকভাবে নিয়ে আসা اটি গোছাতে চিঠির মোট সংখ্যা X হয়, পরে 1/3*X স্ট্যাম্প লাগানোর বেশি এক-তৃতীয়াংশ চিঠির (X - 30) * 2, ইতিমধ্যে স্ট্যাম্প লাগানো হওয়া اটি চিঠির গোছা \n সবচেইয়ে ছোট নম্বর 30। অন্যান্যটি খুঁজে পেতে X = (1/3)*X + 30 সমীকরণ \n থেকে', 'answer': '90'}
+Model Answer: 90
+Correct Answer: 10
+Is Correct: False
+
+Valid Sample 7:
+แก้ปัญหาคณิตศาสตร์นี้
+
+พ่อค้าคนหนึ่งต้องเลือกระหว่างแผนการซื้อ 2 แผน ได้แก่ เครื่องประดับมูลค่า $5,000 หรืออุปกรณ์อิเล็กทรอนิกส์มูลค่า $8,000 ที่ปรึกษาด้านการเงินของเขาคาดการณ์ว่าตลาดเครื่องประดับจะมีมูลค่าสูงขึ้น 2.5% ส่วนตลาดอุปกรณ์อิเล็กทรอนิกส์จะมีมูลค่าสูงขึ้น 1.2% ภายในเดือนเดียวกัน ถ้าพ่อค้าต้องการเลือกแผนที่ทำกำไรสูงสุดภายในสิ้นเดือนนี้ พ่อค้าจะได้กำไรกี่ดอลลาร์
+Model Output: {'reasoning': 'ก่อนอื่นเราต้องคำนวณมูลค่าตลาดของเครื่องประดับและอุปกรณ์อิเล็กทรอนิกส์ แต่เนื่องจากไม่ได้มีตารางข้อมูลที่แน่นอน เราจึงต้องพิจารณากระแสเงินฝากที่เพิ่มขึ้นสำหรับทั้งสองแพลนการซื้อที่แตกต่างกัน จากนั้นเราคำนวณกำไรที่ได้รับจากแต่ละแผน การทำกำไรที่สูงสุดเกิดขึ้นเมื่อพ่อค้าเลือกระหว่างแผนเครื่องประดับที่มีมูลค่าสูงขึ้นและแผนอุปกรณ์อิเล็กทรอนิกส์ที่มีกำไร สุดท้าย เราคำนวณกำไรที่ได้รับ \n ตัวอย่างเช่น หากพ่อค้าต้องการซื้อเครื่องประดับมูลค่า $5,000 และตลาดมีมูลค่าสูงขึ้น 2.5% ดังนั้นมูลค่าผู้ซื้อที่สูงสุดสำหรับเครื่องประดับคือ $5,000 * (1 + 0.025) = $5,250\n ส่วนในกรณีอุปกรณ์อิเล็กทรอนิกส์มีมูลค่าสูงขึ้น 1.2% ดังนั้นมูลค่าผู้ซื้อที่สูงสุดสำหรับอุปกรณ์อิเล็กทรอนิกส์คือ $8,000 * (1 + 0.012) = $8,160\n สำหรับการชำระเงินในแต่ละแผนที่สามารถคำนวณได้ดังนี้ \n สำหรับแผนเครื่องประดับ: \n ต้นทุน = $5,250 - $5,000 = $250 \n กำไรที่ได้รับ = $5,250 - $4,750 = $500\n ในทำนองเดียวกัน สำหรับแผนอุปกรณ์อิเล็กทรอนิกส์ : \n ต้นทุน = $8,160 - $8,000 = $160\n กำไรที่ได้รับ = 8,000 - $7,920 = $80 \n เนื่องจากกำไรของเครื่องประดับมีความใหญ่กว่าจึงเป็นแผนที่ให้ผลกำไรมากที่สุด\n ดังนั้นคำตอบคือ: 500', 'answer': '500'}
+Model Answer: 500
+Correct Answer: 125
+Is Correct: False
+
+Valid Sample 8:
+Resuelve este problema matemático.
+
+Dax fue a su granja a recolectar algunas manzanas y encontró la mitad de bichos que de hormigas en la huerta. Si había 50 hormigas, calcule la cantidad total de insectos en la huerta.
+Model Output: {'reasoning': ['Primero, se nos da el número de hormigas en la huerta: 50', 'Luego, se menciona que Dax encontró la mitad de bichos que de hormigas, por lo que debemos encontrar la cantidad de bichos igual a medio del número de hormigas.', 'Para hacer esto, dividimos el número de hormigas por 2: 50 / 2 = 25', 'Como Dax encontró la mitad de insectos en total, se pueden sumar las dos cantidades para encontrar el número total de insectos en la huerta: 25 + 50 = 75'], 'answer': '75'}
+Model Answer: 75
+Correct Answer: 75
+Is Correct: True
+
+Valid Sample 9:
+Solve this math problem.
+
+Cody eats three times as many cookies as Amir eats. If Amir eats 5 cookies, how many cookies do both of them eat together?
+Model Output: {'reasoning': "Step 1: Identify the number of cookies Amir eats (given) = 5\nStep 2: Calculate the number of cookies Cody eats (since he eats three times as many cookies as Amir)\n3 * Amir's cookies = 3 * 5 = 15\nStep 3: Calculate the total number of cookies both eat together\ntotal_cookies = Amir's cookies + Cody's cookies\n= 5 + 15\n= 20", 'answer': '20'}
+Model Answer: 20
+Correct Answer: 20
+Is Correct: True
+
+Valid Sample 10:
+Resuelve este problema matemático.
+
+Carlos planta un limonero. Plantar el árbol le costará $90. Cada año dará 7 limones, que puede vender a $1,5 cada uno. Regar y nutrir el árbol cuesta $3 al año. ¿Cuántos años le llevará comenzar a ganar dinero con el limonero?
+Model Output: {'reasoning': 'Para determinar cuántos años le tomará que Carlos comience a ganar dinero con el limonero, debemos calcular su ingreso anual y compararlo con sus gastos. 1. Ingreso anual: El limonero da 7 limones al año. Cada limón se vende en $1.5. Los ingresos anuales son de: \n 2. Gastos anuales del limonero: El regazo y la nutrición cuesta $3 cada año.\n 3. Ingreso neto para ganar dinero: \n Por lo tanto, el número de años que tomará para ganar dinero se puede calcular dividiendo el costo inicial por el ingreso neto anual. \n', 'answer': '20'}
+Model Answer: 20
+Correct Answer: 13
+Is Correct: False
+
+Valid Sample 11:
+Resuelve este problema matemático.
+
+La maquilladora de Jeans le cobra $250 la hora. Jeans necesita un maquillaje muy costoso para una película que está rodando y demora 6 horas en hacérselo todos los días, y lo necesita 4 veces por semana. La película demora 5 semanas en terminar. Después de terminar la película, la maquilladora le hace un 10 % de descuento a Jean por el volumen de trabajo realizado. ¿Cuánto pagó Jean?
+Model Output: {'reasoning': ['Primero calculamos cuántas horas trabajó Jean durante las 5 semanas de producción de la película: 6 horas/día * 4 días/semana = 24 horas/semana', 'Luego multiplicamos el número total de horas por el costo por hora para encontrar el monto total que debería haber cobrado Jean: 24 horas/semana * $250/hora = $6000/semana', 'Como la maquilladora le hace un descuento del 10% al final, debemos calcular el descuento aplicable: $6000/semana * 10%/semana = $600 semana', 'Finalmente, restamos la cantidad del descuento de la suma total para encontrar cuánto tuvo que pagar Jean: $6000/semana - $600/semana = $5400/semana'], 'answer': '5400'}
+Model Answer: 5400
+Correct Answer: 27000
+Is Correct: False
+
+Valid Sample 12:
+この数学の問題を解いてください。
+
+マリッサは12マイルにわたるハイキングをします。最初の4マイルを歩くのに1時間かかり、次の2マイルを歩くのにまた1時間かかりました。1時間あたり平均4マイルの時速で歩きたい場合、残りの距離はどれくらいの速度（1時間あたりのマイル数）で歩かないといけませんか？
+Model Output: {'reasoning': 'まず、マリッサが歩きたい平均速度を計算します。平均速度 = 合計距離 / 時間数。\n次に、必要な時間を調べます。最初の 4 マイルには 1 時間かかりましたので、残りの 8 マイルには 。 時間かかるはずです。\n残りの距離を必要な時間で割って速度がわかります。speed = distance / time.\nしたがって、マリッサは時速 1 マイル以下で歩きませんか? の答えは、。 時間のうち 。 の 。 を 。 にするということになります。\nしたがって、残りの速度は 1/2 マイルです。', 'answer': '0.5'}
+Model Answer: 0.5
+Correct Answer: 6
+Is Correct: False
+
+Valid Sample 13:
+แก้ปัญหาคณิตศาสตร์นี้
+
+เจมส์ตัดสินใจวิ่งระยะสั้น 3 เซ็ต 3 ครั้งต่อสัปดาห์ โดยวิ่งเซ็ตละ 60 เมตร ในหนึ่งสัปดาห์เขาวิ่งไปทั้งหมดกี่เมตร
+Model Output: {'reasoning': 'ให้เราหาจำนวนเซตต่อสัปดาห์ \n จำนวนเซตต่อสัปดาห์ = เซตต่อวัน * วันต่อสัปดาห์\n จำนวนเซตต่อสัปดาห์ = 3 เซต/วัน * 7 วัน/สัปดาห์\nจำนวนเซตต่อสัปดาห์ = 21 เซต \n ให้เราคำนวณระยะทางทั้งหมดของการวิ่งในหนึ่งสัปดาห์ \n ระยะทางรวม = จำนวนเซตต่อสัปดาห์ * เซตต่อวินาที \n ระยะทางรวม = 21 เซต * 3 เมตร/เซต\n ระยะทางทั้งหมด = 63 เมตร ', 'answer': '63'}
+Model Answer: 63
+Correct Answer: 540
+Is Correct: False
+
+Valid Sample 14:
+この数学の問題を解いてください。
+
+2つの陸上チームが1600メートルリレーで競っている。1つのチームあたり4名がそれぞれ400メートルずつ、または標準的なトラック1周を走る競技である。1つのチームでは能力が均等で、それぞれ400メートルをちょうど55秒間で走りきる。もう1つのチームでは能力に多少ばらつきがあり、1人目の走者は60秒間で走り切り、その後の走者は前の走者よりもそれぞれ3秒早いタイムで走る。この情報をもとにすれば、勝利するチームは何秒差で勝利するだろうか？
+Model Output: {'reasoning': '1 つのチームでは能力が均等なので、すべてのメンバーが同じ時間で走れるという条件があります。したがって、2 番目のチームでも同じ条件を満たす必要があります。\n\n2 番目のチームでは能力にばらつきがあり、最初のメンバーは 60 秒で走るのに対し、その後のメンバーはそれぞれ 3 秒早いタイムで走ることができます。\n\nしたがって、2 番目のチームの 4 番目のメンバー (最後のメンバー) は、最初のメンバーよりも 3 秒早く走ります。この情報を利用して、各メンバーの走時を計算します。\n\n1. 最初のメンバー: 60 秒 \\\n2. 2 番目のメンバー: 57 秒 (60 - 3) \\\n3. 3 番目のメンバー: 54 秒 (57 - 3) \\\n4. 4 番目のメンバー: 51 秒 (54 - 3)\n\n2つのチームの走行時間を加算することで、各チームが走る合計距離を計算できます。\n\n最初のチーム: 55 + 55 + 55 + 55 = 220 秒 \\\n2 番目のチーム: 60 + 57 + 54 + 51 = 222 秒 \\\n\n次に、各チームが走る合計時間を比較します。この問題では、1 つかのケースが考えられます。\\ \n\n 1. 最初のチームが勝利する場合: 220 < 222 (この場合は負けます)。\n2. 2 番目のチームが勝利する場合: 222 < 220 (この場合は負けます).\n3. 統合不等式が破棄されるか、または無限大に近づくか: これらのケースはおもな関数です。\n \\\n諵にが 天名れし"、ただ \\\\ 一介だんてい⤱ですて \\\n\\ 川てただれ家二ぼすい \\\\ \n勘的にんてい\x0b大〳¡だだくょ \\\n\\\nsort()はPythonの関数です。\n\n\x08egin{align*} &amp; 220 < 222\\ &amp; \text{。 } 220 \\ \text{一介}\n3. 1 を加算した結果が 0 より大きいか小さいかを判断する: \\\\ \x08egin{align*} 222 - 220 &amp;= 2\\ &amp; > 0 \\\n\text{。 } \\\\ \text{1つ目のケースはおやつ。}\n\\\nthat\'s the case where one team wins and the other loses!\\ \\\nthink about what this means: \\\\\n\n\x08egin{align*} &amp; 220 < 222 \\ &amp; \text{。 } 220 \\\\ \text{したがって、最初のチームは負けます。}\n \\\\ \\\nbattery life of the first team has decreased.}\nThe time taken for one runner in the second team is 57 seconds, and that value can be adjusted by -3 seconds. 57-3=54, 54-3=51, 51-3=48, 48-3=45 \\\\ \text{一介} \\\n\x08egin{align*} &amp; 60 + 57 + 54 + 51 \\\\ &amp;\text{。 } 222 \\ \text{2nd team}\n \\\\ \\\n\x08egin{align*} &amp; 48 + 45 + 42 + 39 \\\\ &amp;\text{一介} 222 + 9 \\\\ = 231.\n\text{} \\\\ は 2 回目が勝つ。\n \\\nkickoff!}\n \\\\ \\\n. \\\\ \\\nということを意味する。 \\\\\n\x08egin{align*} &amp; 48 + 45 + 42 + 39 \\\\ &amp;\text{。 } 231 \\ \text{合計時間に 3 を加算する}\n \\\\ \\\n\x08egin{align*} &amp; \text{一介} 222+9 \\\\ = 231 \\ \text{ } \\\\ \\\n\x08egin{align*} &amp; 48 + 45 + 42 + 39 \\\\ &amp;\text{。 } 231 \\ \text{2nd team}\n \\\\ \\\nkickoff!}\n \\\nanalysis.\n\\\\ The first team\'s battery life is more than the second team\'s. \\\\ 1. 最初のチームが勝利する場合: 220 < 222 (この場合は負けます).\n2. 2 番目のチームが勝利する場合: 222 < 220 (この場合は負けます).\n3. 統合不等式が破棄されるか、または無限大に近づくか: \\\\ \x08egin{align*} &amp; 48 + 45 + 42 + 39 \\ &amp;\text{。 } 231 \\ \text{1st team}\n \\\nkickoff!}\n \\\n\text{ } \\\\ \\\nkahoot. \\\\\n \x08egin{align*} &amp; \text{一介} 222+9 \\ \text{ } \\\\ \\\nnow we need to know what the next step is, because this time around, there isn\'t a clear answer \\\\ n. \\\\ \\\n\x08egin{align*} &amp; 60 + 57 + 54 + 51 \\\\ &amp;\text{。 } 222 \\ \text{2nd team}\n \\\\ \\\nkickoff!}\n \\\\\\\n\text{} \\\\ \\\nsince the first team has run out of battery life, it can\'t win this race.} \\\\ \\\nto determine the winner,\n\\\\ we need to add up both teams\' times and see who comes out on top.\n \\\\ \\\n\x08egin{align*} &amp; 220 + 222 \\ &amp;\text{。 } 442 \\ \text{合計時間}\n \\\\ \\\n\text{} \\\\ \\\nsince we want to know the time difference, we need to find out when the first team finishes.\n \\\\ \\\npicture this: \\\\\n\x08egin{align*} &amp; 60 + 57 + 54 + 51 \\ &amp;\text{。 } 222 \\ \text{2nd team}\n \\\\ \\\nkickoff!}\n \\\\\\\nsince the second team is already ahead of schedule, they can\'t be beaten in this scenario.} \\\\ \\\nto determine the winner,\n\\\\ we need to add up both teams\' times and see who comes out on top.\n \\\\ \\\n\x08egin{align*} &amp; 48 + 45 + 42 + 39 \\ &amp;\text{。 } 231 \\ \text{1st team}\n \\\\ \\\nkickoff!}\n\\\\ \\\nbattery life of the first team has increased.}\\ \\\\ \\\n\x08egin{align*} &amp; 60 + 57 + 54 + 51 \\\\ &amp;\text{。 } 222 \\ \text{2nd team}\n \\\\ \\\nkickoff!}\n \\\\\\\nsince the second team is already ahead of schedule, they can\'t be beaten in this scenario.} \\\\ \\\nto determine the winner,\n\\\\ we need to add up both teams\' times and see who comes out on top.\n \\\\ \\\n\x08egin{align*} &amp; 48 + 45 + 42 + 39 \\ &amp;\text{。 } 231 \\ \text{1st team}\n \\\\ \\\nkickoff!}\n \\\\\\\nnow we need to know what the next step is, because this time around, there isn\'t a clear answer \\\\ n. \\\\ \\\n\x08egin{align*} &amp; 60 + 57 + 54 + 51 \\ &amp;\text{。 } 222 \\ \text{2nd team}\n \\\\ \\\nkickoff!}\n \\\\\\\nkahoot.\n \\\\ \\\nbattery life of the first team is more than the second team.}\\ \\\\ \\\n\x08egin{align*} &amp; 48 + 45 + 42 + 39 \\ &amp;\text{。 } 231 \\ \text{1st team}\n \\\\ \\\nkickoff!}\n\\\\ \\\n\text{} \\\\ \\\nsince the first team has run out of battery life, it can\'t win this race.} \\\\ \\\nto determine the winner,\n\\\\ we need to add up both teams\' times and see who comes out on top.\n \\\\ \\\n\x08egin{align*} &amp; 60 + 57 + 54 + 51 \\ &amp;\text{。 } 222 \\ \text{2nd team}\n \\\\ \\\nkickoff!}\n \\\\\\\nkahoot.}\\\\\\n \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\n the second team cannot be beaten in this scenario.}\\\\\\n\text{} \\\\ \\\nkickoff!}\\ \\\\ \\\n\x08egin{align*} &amp; 48 + 45 + 42 + 39 \\ &amp;\text{。 } 231 \\ \text{1st team}\n \\\\ \\\nkickoff。\n \\\\ \\\\n\text{} \\\\ \\\npositive.}\x08oxed{2nd}\n\text{} \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\n\x08egin{align*} &amp; 48 + 45 + 42 + 39 \\ &amp;\text{。 } 231 \\ \text{1st team}\n \\\\ \\\nkickoff!}\n \\\\\\\npicture this: \\\\\n\x08egin{align*} &amp; 60 + 57 + 54 + 51 \\ &amp;\text{。 } 222 \\ \text{2nd team}\n \\\\ \\\nkickoff!}\n \\\\\\\nsince the second team is already ahead of schedule, they can\'t be beaten in this scenario.} \\\\ \\\nto determine the winner,\n\\\\ we need to add up both teams\' times and see who comes out on top.\n \\\\ \\\nmagical thinking.\n\text{} \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\n the first team\'s battery life is more than the second team\'s.}\\ \\\\ \\\nnow we need to know what the next step is, because this time around, there isn\'t a clear answer \\\\ n. \\\\ \\\n\x08egin{align*} &amp; 48 + 45 + 42 + 39 \\ &amp;\text{。 } 231 \\ \text{1st team}\n \\\\ \\\nkickoff!}\n \\\\\\\npicture this: \\\\\n\x08egin{align*} &amp; 60 + 57 + 54 + 51 \\ &amp;\text{。 } 222 \\ \text{2nd team}\n \\\\ \\\nkickoff!}\n \\\\\\\nsince the second team is already ahead of schedule, they can\'t be beaten in this scenario.} \\\\ \\\nto determine the winner,\n\\\\ we need to add up both teams\' times and see who comes out on top.\n \\\\ \\\nmagical thinking.\n\text{} \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\n the first team cannot be beaten in this scenario.}\\\\\\n\text{} \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\n the second team cannot be beaten in this scenario.}\\\\\\n\text{} \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\n\x08egin{align*} &amp; 48 + 45 + 42 + 39 \\ &amp;\text{。 } 231 \\ \text{1st team}\n \\\\ \\\nkickoff!}\n \\\\\\\npicture this: \\\\\n\x08egin{align*} &amp; 60 + 57 + 54 + 51 \\ &amp;\text{。 } 222 \\ \text{2nd team}\n \\\\ \\\nkickoff!}\n \\\\\\\nsince the second team is already ahead of schedule, they can\'t be beaten in this scenario.} \\\\ \\\nto determine the winner,\n\\\\ we need to add up both teams\' times and see who comes out on top.\n \\\\ \\\nmagical thinking.\n\text{} \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\n the first team\'s battery life is more than the second team\'s.}\\ \\\\ \\\nnow we need to know what the next step is, because this time around, there isn\'t a clear answer \\\\ n. \\\\ \\\n\x08egin{align*} &amp; 48 + 45 + 42 + 39 \\ &amp;\text{。 } 231 \\ \text{1st team}\n \\\\ \\\nkickoff!}\n \\\\\\\npicture this: \\\\\n\x08egin{align*} &amp; 60 + 57 + 54 + 51 \\ &amp;\text{。 } 222 \\ \text{2nd team}\n \\\\ \\\nkickoff!}\n \\\\\\\nsince the second team is already ahead of schedule, they can\'t be beaten in this scenario.} \\\\ \\\nto determine the winner,\n\\\\ we need to add up both teams\' times and see who comes out on top.\n \\\\ \\\nmagical thinking.\n\text{} \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\n the second team cannot be beaten in this scenario.}\\\\\\n\text{} \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\n the first team cannot be beaten in this scenario.}\\\\\\n\x08oxed{2nd}\n \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\\\ \\nIn this case, the second team cannot be beaten in this scenario. Therefore, the winner of the game is the second team.\nIn this case, the first team can be beaten. Therefore, the winner of the game is the first team.\n\\nIn this case, the third team wins.\nIn this case, the fifth team wins.\n\n In this example, we have two teams: Team A and Team B (that were listed as 1st and 2nd) and Team C. The winning team is Team A, as they cannot be beaten in any scenario. Therefore, the final answer is not among the provided options and should be calculated based on new game data. \\n\\nIn this case, it was also possible for Team B (the second best option listed). In other words, if we consider that the win condition of Team A can be lost (which actually cannot happen according to the given information), then there is an alternative winning team: Team B (the team ranked 2nd by default if Team A loses). \\n\\nIn this case, the game will continue and both teams make their next moves. Team A makes its move, while Team B makes its opposing move.\nTeam A has 80 points at the start of the match. \\nTeam B has 85 points at the start of the match. \\n\\nAfter each turn, the team with fewer points wins the round and earns 10 points for themselves in the overall standings (in case it\'s a win condition), while the other team earns 5 points. The winner of the game is determined by the score of each team at the end of the game.\nIn this scenario, Team B earns 15 more points than Team A, so they earn 10 points for themselves in the first round and their overall standings are updated as follows: \\n\\nTeam A:\\n\\n- Points: 70 (80 - 10)\n\\nTeam B:\\n\\n- Points: 100 (85 + 15 + 5)\n\\nAt this point, Team A does not have enough points to beat Team B in the overall standings. They now can only tie or lose with Team B.\nIn other words, the game will determine who wins by their scores at the end of the game. This means that Team A and Team B are tied with each other after multiple rounds of matches.\n\\nAs there is no more information about winning conditions, it\'s impossible to know for sure whether Team A or Team B win in terms of the rules of this game. For instance, if we have a tiebreaker rule where points from previous matches are used to determine the winner, then Team A might have won as they had 5 less point than Team B (100 vs 95).\\n\\nIn the first scenario, since there\'s no tiebreaker rule and winning conditions were stated that ', 'answer': 'NO answer IN DICTIONARY'}
+Model Answer: NO answer IN DICTIONARY
+Correct Answer: 2
+Is Correct: False
+
+Valid Sample 15:
+Resuelve este problema matemático.
+
+John conduce durante 3 horas a una velocidad de 60 mph y luego da la vuelta porque se da cuenta de que se olvidó algo muy importante en la casa. Intenta volver a la casa en 4 horas, pero pasa las primeras 2 horas en un embotellamiento de tráfico. La siguiente media hora conduce a una velocidad de 30 mph antes de poder conducir el tiempo restante de las 4 horas a 80 mph. ¿A qué distancia de la casa se encuentra al final de esas 4 horas?
+Model Output: {'reasoning': 'Para resolver este problema, debemos dividirlo en varias partes y calcular la distancia recorrida en cada etapa.\n\n Primero, calculamos la distancia recorrida durante las primeras 3 horas: \n distancia = velocidad * tiempo = 60 mph * 3 horas = 180 millas \n\n Luego, calculamos la distancia recorrida durante el embotellamiento de tráfico de 2 horas: \n distancia = velocidad * tiempo = 30 mph * 2 horas = 60 millas \n\n A continuación, calculamos la distancia recorrida durante las últimas 2 horas a una velocidad de 80 mph: \n distancia = velocidad * tiempo = 80 mph * 2 horas = 160 millas \n\n Finalmente, sumamos las distancias recorridas en cada etapa y restamos la suma de las primeras dos para obtener la distancia total a la casa: \n distancia_total = (180 + 60 + 160) - 180 = 260 millas', 'answer': '260'}
+Model Answer: 260
+Correct Answer: 45
+Is Correct: False
+
+Valid Sample 16:
+Löse dieses Mathematikproblem.
+
+Ein Händler kauft ein paar Säcke Weizen bei einem Bauern zu einem Satz von 20 $ pro Sack. Wenn es 2 $ kostet, um jeden Sack von dem Bauernhof in das Lagerhaus zu transportieren, und der Händler einen Gesamtgewinn von 400 $ machte, nachdem er alle Säcke zu einem Satz von jeweils 30 $ verkauft hatte, wie viele Säcke verkaufte er dann?
+Model Output: {'reasoning': 'Um dieses Problem zu lösen, verwenden wir zunächst die folgende Gleichung:\n\nCost of wheat bags + Cost of transportation = Total profit + Total cost of wheat bags\n\n20x + 2x = 400 + (20 * x)\n\nwobei x die Anzahl der Säcke ist.\n\nWenn wir ähnliche Terme kombinieren, erhalten wir:\n\n(20+2)x = 400 + 20x\n\n22x = 400 + 20x\n\nSubtrahieren Sie 20x von beiden Seiten:\n\n22x - 20x = 400 + 20x - 20x \n\ntypisch 2x = 400 \nDividieren Sie beide Seiten durch 2:\n\ntypisch x = 200', 'answer': '200'}
+Model Answer: 200
+Correct Answer: 50
+Is Correct: False
+
+Valid Sample 17:
+แก้ปัญหาคณิตศาสตร์นี้
+
+เซดใช้ 1/4 ของเงินเดือนของเขาจ่ายค่าเช่า 1/3 จ่ายค่าน้ำมันรถยนต์ และบริจาคครึ่งหนึ่งของจำนวนเงินที่เหลือให้กับองค์กรการกุศลที่เขาชื่นชอบ เขาให้เงินลูกสาว $200 สำหรับใช้จ่ายรายสัปดาห์ และให้ภรรยา $700 เพื่อเป็นงบสำหรับซื้อของชำและของใช้ในครัวเรือนอื่นๆ ถ้าเซดมีรายได้ $6000 ต่อเดือน เขาจะยังเหลือเงินเท่าไหร่หลังจากหักค่าใช้จ่ายและการบริจาคทั้งหมดนี้
+Model Output: {'reasoning': '1. เลขค่าใช้จ่ายค่าเช่าค่าใช้จ่ายรถยนต์ค่าใช้จ่ายรายสัปดาห์ ค่าใช้จ่ายสำหรับซื้อของชำและของใช้ในครัวเรือน \n2. ตั้งค่าจำนวนเงินค่าใช้จ่ายแต่ละประเภทตามปัญห \n3. บวกค่าใช้จ่ายที่ต้องชำระเพื่อหาค่าตัดเงินเดือนทั้งหมด \n4. นำรายได้ทั้งหมดลบออกจากค่าตัดเงินเดือนเพื่อกำหนดจำนวนเงินเหลือหลังจากหักค่าใช้จ่ายและการบริจาค โดยพิจารณาจากจำนวนเงินค่าทั้งหมดนี้', 'answer': '0'}
+Model Answer: 0
+Correct Answer: 350
+Is Correct: False
+
+Valid Sample 18:
+Решите эту математическую задачу.
+
+В классе есть маркерная доска, которую делят 4 учителя, по очереди использующие класс. Каждый учитель проводит 2 урока в день и использует доску на каждом уроке. Если доску чистят 3 раза за урок, сколько раз в день очищается доска?
+Model Output: {'reasoning': ['Сначала нам нужно узнать, сколько раз каждый учитель чистит доску в день.', 'Поскольку каждый учител проводит 2 урока в день и использует доску на каждом уроке, каждый учитель чистит доску 2*3=6 раз в день.', 'Однако мы know, что доска делится между 4 учителями, поэтому мы должны разделить количествоCleanings на 4', 'Следовательно, доску cleanet  6/4 = 1,5 раза в день.'], 'answer': '3'}
+Model Answer: 3
+Correct Answer: 24
+Is Correct: False
+
+Valid Sample 19:
+Résolvez ce problème de mathématiques.
+
+Carlos veut planter un citronnier. Le coût de la plantation est de 90 $. Chaque année, l'arbre produira 7 citrons qui seront vendus au prix de 1,5 $ chacun. L'arrosage et la nutrition de l'arbre coûtent 3 $ par an. Combien d'années faudra-t-il à Carlos pour commencer à gagner de l'argent avec son citronnier ?
+Model Output: {'reasoning': ['Trouvons les bénéfices annuels du citronnier.\n', "Le coût initial est de 90 $, mais nous ne prenons en compte ce coût que si cela fait une différence dans le résultat final. Si nous ajoutions ce coût à un calcul de bénéfice, alors il faudrait compter les 90$ que Carlos dépensera pour acheter l'arbre et gagner cette amont.\n", 'Le citronnier produit chaque année 7 citrons qui peuvent être vendus au prix de 1,5 $ chacun.\n', 'Cela signifie que le revenu annuel du citronnier est de 7 x 1.5 = 10,5 $.\n', "L'arrosage et la nutrition coûtent 3\xa0$ par an. Il faut donc soustraire ce coût du bénéfice pour trouver le chiffre brut net des revenus. \n", 'Bénéfices brut avant les coûts de maintenance : 10,5 $ - 3 dollars = 7,5 $. \n', "Nous calculerons maintenant combien de dollars pourraient être gagnés si les coûts de plantation, maintenances et toutes les autres dépenses ne sont pas prises en compte. Il faudrait donc ajouter l'argent que Carlos dépense à trouver le montant brut qui sera gagné.\n", 'Montant brut total du revenus sans les factures \n', 'Le coût de plantation est de 90 $, ce que nous additionnerons au bénéfice brut: 7.5 $ + 90 $ = 97.5$. \n', "Cela signifie que Carlos devra attendre 90/ 97,5 $ ans pour gagner de l'argent.\n"], 'answer': '17'}
+Model Answer: 17
+Correct Answer: 13
+Is Correct: False

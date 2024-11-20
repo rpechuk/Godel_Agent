@@ -533,7 +533,13 @@ class Agent(AgentBase):
         
         if 'tool_calls' not in actions:
             print("Agent Evolve - NO TOOLS CALLED :(", end="\n\n")
-            agent.optimize_history.append({"role": "user", "content": "Don't forget that you must have at least one tool call in your actions."})
+            agent.optimize_history.append({
+                "role": "user",
+                "content": """Don't forget the following things:
+1. You must respond with at least one tool call.
+2. Your goal is to improve the solver function's performance on the task.
+3. If you are ready to run the task, then call `action_evaluate_on_task` with the relevant arguments."""
+})
             agent.evolve()
             return
 
@@ -620,13 +626,16 @@ class Agent(AgentBase):
         messages = [{"role": "system", "name": "Principles", "content": agent.goal_prompt}, 
                     {"role": "system", "name": "Environment", "content": action_environment_aware(agent)},
                     *agent.optimize_history]
-
-        print("Messages:")
-        pprint.pp(messages[2:])
-        print("\n\n")
+        
+        # NOTE(Ron): This doesn't work but i'm leaving it here for testing sake and also to show how I debugged the issue
+        # if action_counter["evolve"] == 1:
+        #     result = action_evaluate_on_task(agent.goal_task, functools.partial(solver, agent))
+        #     with open("result.txt", "w") as f:
+        #         f.write(result)
+        #     messages.append({"role": "user", "content": "The intial evaluation result was:\n" + str(result)})
 
         try:
-            response = agent.action_call_llm(messages=messages, model="gpt-3.5-turbo", response_format="text", tools=agent.action_functions, tool_choice="required")
+            response = agent.action_call_llm(messages=messages, model="gpt-4o", response_format="text", tools=agent.action_functions, context=True)
             print(response)
         except Exception as e:
             print(repr(e))
@@ -671,29 +680,31 @@ class Agent(AgentBase):
     def action_call_llm(
         agent, 
         *,
+        model: typing.Literal["gpt-3.5-turbo", "gpt-4o-mini", "gpt-4o"] = "gpt-4o-mini", 
         messages: typing.List[typing.Dict[str, str]], 
-        model: typing.Literal["gpt-3.5-turbo"] = "gpt-3.5-turbo", 
         temperature: float = 1.0, 
         max_completion_tokens: int = 4096, 
         n: int = 1,
         response_format: typing.Literal["text", "json", "json_object"] = "text", 
         tools=None, 
-        tool_choice=None,
+        context=False
     ):
         """
-        Enhanced version of action_call_llm that adds RAG context
+        Sends a request to the OpenAI LLM with a system prompt and user message, and returns the response.
+
+        Args:
+            agent (Agent): The OpenAI client instance used to interact with the LLM.
+            messages (List[Dict[str, str]]): A list of message dictionaries (conversation history).
+            response_format (str): The desired format of the LLM's output.
+            model (str): Specifies which LLM model to use.
+            temperature (float): A float value controlling the randomness of the model's responses. Higher values (e.g., 1.0) increase creativity, while lower values (e.g., 0.1) make the responses more focused and deterministic.
+            max_completion_tokens: An integer defining the maximum number of tokens in the completion response, up to 4096.
+            n (int): The number of chat completion choices to generate for each input message.
+
+        Returns:
+            response (dict): The response from the OpenAI LLM.
         """
         try:
-            # Augment the messages with relevant context from RAG
-            query = ' '.join([msg['content'] for msg in messages])
-            augmented_query = agent.rag.augment_query(query)
-            
-            # Add the augmented context as a system message
-            messages.insert(0, {
-                "role": "system",
-                "content": f"Here is the relevant context for this query:\n\n{augmented_query}"
-            })
-
             if response_format == "json":
                 response_format = "json_object"
             
@@ -715,6 +726,14 @@ class Agent(AgentBase):
                 kwargs["tools"] = tools
                 # kwargs["tool_choice"] = tool_choice # NOTE: this does nothing with Ollama right now
 
+            if context:
+                ctx = agent.rag.get_context(messages[-1]["content"], k=1)
+                messages.insert(2, {"role": "system",  "name": "context", "content": "**Use the following context about the system to inform your next tool calls:**\n" + ctx})
+
+                print("Messages:")
+                pprint.pp(messages[2:])
+                print("\n\n")
+
             response = agent.client.chat.completions.create(**kwargs).to_dict() # to Python dictionary
             
             def try_parse_json(content):
@@ -729,23 +748,5 @@ class Agent(AgentBase):
                 return [try_parse_json(choice["message"]["content"]) for choice in response["choices"]]
         except Exception as e:
             raise e
-        
-    # def action_call_llm(agent, *args, **kwargs):
-    #     """
-    #     Enhanced version of action_call_llm that adds RAG context
-    #     """
-    #     # Augment the messages with relevant context
-    #     if 'messages' in kwargs:
-    #         query = ' '.join([msg['content'] for msg in kwargs['messages']])
-    #         augmented_query = agent.rag.augment_query(query)
-            
-    #         # Add the augmented context as a system message
-    #         kwargs['messages'].insert(0, {
-    #             "role": "system",
-    #             "content": f"Here is the relevant context for this query:\n\n{augmented_query}"
-    #         })
-        
-    #     # Call the original implementation
-    #     return super().action_call_llm(*args, **kwargs)
 
 self_evolving_agent = Agent()

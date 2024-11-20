@@ -1,4 +1,5 @@
 import json
+import os
 import random
 import time
 import string
@@ -51,7 +52,7 @@ LANG_TO_INSTRUCTIONS = {
 {input}"""
 }
 
-LANG_TO_FPATH = lambda lang: f"../dataset/mgsm/mgsm_{lang}.tsv"
+LANG_TO_FPATH = lambda lang: f"../datasets/mgsm/mgsm_{lang}.tsv"
 
 ALL_LANGUAGES = ["bn", "de", "en", "es", "fr", "ja", "ru", "sw", "te", "th", "zh"]
 
@@ -166,6 +167,7 @@ def score_mgsm(target: str, prediction: str) -> bool:
 def get_lang_examples(lang: str) -> list[dict[str, str]]:
     fpath = LANG_TO_FPATH(lang)
     examples = []
+
     with open(fpath, mode='r', encoding='utf-8') as f:
         for line in f:
             inputs, targets = line.strip().split("\t")
