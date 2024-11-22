@@ -16,6 +16,7 @@ import collections
 import openai
 import logic
 import pprint
+from tasks import task_mgsm
 from rag import StructuredRAG
 
 
@@ -280,7 +281,7 @@ def action_run_code(code_type: str, code: str, timeout: float = 30.0) -> str:
     
     return result_str or "No output, errors, or return value."
 
-import task_mgsm as task_mgsm
+
 def solver(agent, task: str):
     messages = [{"role": "user", "content": f"# Your Task:\n{task}"}]
     response = agent.action_call_json_format_llm(
