@@ -25,6 +25,68 @@ import agent_modules.solver as solver
 import agent_modules.action_tools as action_tools
 
 
+tool_call_examples = [{
+    'content': '',
+    'role': 'assistant',
+    'tool_calls': [{
+        'id': 'call_9xqxybrj',
+        'function': {'arguments': '{"module_name":"agent_module","target_name":"solver"}','name': 'action_read_logic'},
+        'type': 'function'
+    }]
+}, {
+    'role': 'tool',
+    'content': action_functions.action_read_logic("agent_module", "solver"),
+    'tool_call_id': 'call_9xqxybrj'
+}, {
+    'content': '',
+    'role': 'assistant',
+    'tool_calls': [{
+        'id': 'call_ac28pj9s',
+        'function': {'arguments': '{"analysis":"The current solver logic reads the task, sends it to an LLM for processing with specific parameters (model, messages, temperature, number of responses, role, and requirements). The response is expected to include "reasoning" and "answer" keys. The answer is then converted to a string before being returned."}','name': 'action_display_analysis'},
+        'type': 'function'
+    }]
+}, {
+    'role': 'tool',
+    'content': action_functions.action_display_analysis("The current solver logic reads the task, sends it to an LLM for processing with specific parameters (model, messages, temperature, number of responses, role, and requirements). The response is expected to include 'reasoning' and 'answer' keys. The answer is then converted to a string before being returned."),
+    'tool_call_id': 'call_ac28pj9s'
+}, {
+    'content': '',
+    'role': 'assistant',
+    'tool_calls': [{
+        'id': 'call_pm8mijoa',
+        'function': {'arguments': '{"code_type":"python","code":"def action_print_hello():\n    print("Hello World!")\naction_print_hello()"}','name': 'action_run_code'},
+        'type': 'function'
+    }]
+}, {
+    'role': 'tool',
+    'content': action_functions.action_run_code("python", "def action_print_hello():\n    print('Hello World!')\naction_print_hello()"),
+    'tool_call_id': 'call_pm8mijoa'
+}, {
+    'content': '',
+    'role': 'assistant',
+    'tool_calls': [{
+        'id': 'call_c3m2908m',
+        'function': {'arguments': '{"module_name":"agent_module","target_name":"action_print_hello","new_code":"def action_print_hello():\n    print("Hello World!"")","operation","add"}','name': 'action_adjust_logic'},
+        'type': 'function'
+    }]
+}, {
+    'role': 'tool',
+    'content': action_functions.action_adjust_logic("agent_module", "action_print_hello", "def action_print_hello():\n    print('Hello World!')", operation="add"),
+    'tool_call_id': 'call_c3m2908m'
+}, {
+    'content': '',
+    'role': 'assistant',
+    'tool_calls': [{
+        'id': 'call_pm8mijoa',
+        'function': {'arguments': '{"code_type":"bash","code":"ls -l"}','name': 'action_run_code'},
+        'type': 'function'
+    }]
+}, {
+    'role': 'tool',
+    'content': action_functions.action_run_code("bash", "ls -l"),
+    'tool_call_id': 'call_pm8mijoa'
+}]
+
 class Agent(AgentBase.AgentBase):
     def __init__(agent, goal_prompt_path='goal_prompt.md'):
         # Load configurations
@@ -42,6 +104,10 @@ class Agent(AgentBase.AgentBase):
 
         # Initialize RAG system
         agent.rag = StructuredRAG()
+
+        #  Add few shot examples of tool calls
+        agent.optimize_history.extend(tool_call_examples)
+        
         
     def reinit(agent):
         agent.optimize_history = []
@@ -53,6 +119,7 @@ class Agent(AgentBase.AgentBase):
 
         # agent.optimize_history.append({"role": "user", "content": first_aware_content})
         agent.optimize_history.append({"role": "user", "content": "The logic of solver:\n" + solver_logic})
+        agent.optimize_history.extend(tool_call_examples)
 
     def execute_action(agent, actions: typing.Dict):
         """
