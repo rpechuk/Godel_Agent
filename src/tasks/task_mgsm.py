@@ -107,7 +107,7 @@ def real_evaluate(solver):
     acc = sum(acc_list) / len(acc_list)
     interval = bootstrap_confidence_interval(acc_list)
     if acc > last_test_acc:
-        open(f"result/mgsm_{round(acc, 4)}.txt", "w").writelines([interval] + info_list)
+        open(f"results/mgsm_{round(acc, 4)}.txt", "w").writelines([interval] + info_list)
     return acc
 
 class MGSM_Task:

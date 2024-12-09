@@ -11,7 +11,6 @@ import time
 from wrap import wrap_solver
 
 Example = namedtuple('Example', ['question', 'choice1', 'choice2', 'choice3', 'choice4', 'correct_index'])
-client = OpenAI()
 threshold = 0.80
 last_test_acc = 0.
 
@@ -49,7 +48,7 @@ def solver(agent, task: str):
 def real_evaluate(solver):
     LETTER_TO_INDEX = {'A': 0, 'B': 1, 'C': 2, 'D': 3}
     # set seed 0 for valid set
-    data_filename = "../dataset/mmlu.csv"
+    data_filename = "../datasets/mmlu.csv"
     df = pandas.read_csv(data_filename)
     random.seed(0)
     examples = [row.to_dict() for _, row in df.iterrows()]
@@ -83,14 +82,14 @@ def real_evaluate(solver):
     acc = sum(acc_list) / len(acc_list)
     interval = bootstrap_confidence_interval(acc_list)
     if acc > last_test_acc:
-        open(f"result/mmlu_{round(acc, 4)}.txt", "w").writelines([interval] + info_list)
+        open(f"results/mmlu_{round(acc, 4)}.txt", "w").writelines([interval] + info_list)
     return acc
 
 class MMLU_Task:
     def evaluate(self, solver):
         # LETTER_TO_INDEX = {'A': 0, 'B': 1, 'C': 2, 'D': 3}
         # set seed 0 for valid set
-        data_filename = "../dataset/mmlu.csv"
+        data_filename = "../datasets/mmlu.csv"
         df = pandas.read_csv(data_filename)
         random.seed(0)
         examples = [row.to_dict() for _, row in df.iterrows()]

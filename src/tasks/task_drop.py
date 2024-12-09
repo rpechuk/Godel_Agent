@@ -44,7 +44,7 @@ def solver(agent, task: str):
 
 
 def real_evaluate(solver):
-    data_filename = "../dataset/drop_v0_dev.jsonl.gz"
+    data_filename = "../datasets/drop_v0_dev.jsonl.gz"
     examples = load_drop(data_filename)[1:-1]  # first one and the last one is for few-shot examples
     random.seed(0)
     random.shuffle(examples)
@@ -79,13 +79,13 @@ def real_evaluate(solver):
     acc = sum(acc_list) / len(acc_list)
     interval = bootstrap_confidence_interval(acc_list)
     if acc > last_test_acc:
-        open(f"result/drop_{round(acc, 4)}.txt", "w").writelines([interval] + info_list)
+        open(f"results/drop_{round(acc, 4)}.txt", "w").writelines([interval] + info_list)
     return acc
 
 
 class DROP_Task:
     def evaluate(self, solver):
-        data_filename = "../dataset/drop_v0_dev.jsonl.gz"
+        data_filename = "../datasets/drop_v0_dev.jsonl.gz"
         examples = load_drop(data_filename)[1:-1]  # first one and the last one is for few-shot examples
         random.seed(0)
         random.shuffle(examples)

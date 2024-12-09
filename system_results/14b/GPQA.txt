@@ -1,0 +1,1177 @@
+The current solver logic reads the task, sends it to an LLM for processing with specific parameters (model, messages, temperature, number of responses, role, and requirements). The response is expected to include 'reasoning' and 'answer' keys. The answer is then converted to a string before being returned. 
+
+
+def action_print_hello():
+    print('Hello World!')
+
+Found dynamic Ollama process: 50912
+Initiliazed RAG with files:
+./goal_prompt.md
+./__init__.py
+./logic.py
+./rag.py
+./main.py
+./wrap.py
+./docs/action_tools_docs.py
+./docs/action_functions_docs.py
+./docs/__init__.py
+./docs/AgentBase_docs.py
+./docs/Agent_docs.py
+./docs/solver_docs.py
+./agent_module/AgentBase.py
+./agent_module/solver.py
+./agent_module/action_tools.py
+./agent_module/__init__.py
+./agent_module/action_functions.py
+./agent_module/Agent.py
+Global Functions:
+- action_display_analysis = <function action_display_analysis at 0x1054eee80>
+- action_environment_aware = <function action_environment_aware at 0x1062da2a0>
+- action_read_logic = <function action_read_logic at 0x1062da660>
+- action_adjust_logic = <function action_adjust_logic at 0x135a554e0>
+- action_run_code = <function action_run_code at 0x135a55580>
+- action_evaluate_on_task = <function action_evaluate_on_task at 0x135a55620>
+- action_print_hello = <function action_print_hello at 0x135a556c0>
+
+Global Modules:
+- os = <module 'os' (frozen)>
+- io = <module 'io' (frozen)>
+- re = <module 're' from '/opt/anaconda3/envs/godel/lib/python3.12/re/__init__.py'>
+- ast = <module 'ast' from '/opt/anaconda3/envs/godel/lib/python3.12/ast.py'>
+- sys = <module 'sys' (built-in)>
+- json = <module 'json' from '/opt/anaconda3/envs/godel/lib/python3.12/json/__init__.py'>
+- typing = <module 'typing' from '/opt/anaconda3/envs/godel/lib/python3.12/typing.py'>
+- inspect = <module 'inspect' from '/opt/anaconda3/envs/godel/lib/python3.12/inspect.py'>
+- functools = <module 'functools' from '/opt/anaconda3/envs/godel/lib/python3.12/functools.py'>
+- itertools = <module 'itertools' (built-in)>
+- traceback = <module 'traceback' from '/opt/anaconda3/envs/godel/lib/python3.12/traceback.py'>
+- importlib = <module 'importlib' from '/opt/anaconda3/envs/godel/lib/python3.12/importlib/__init__.py'>
+- subprocess = <module 'subprocess' from '/opt/anaconda3/envs/godel/lib/python3.12/subprocess.py'>
+- contextlib = <module 'contextlib' from '/opt/anaconda3/envs/godel/lib/python3.12/contextlib.py'>
+- collections = <module 'collections' from '/opt/anaconda3/envs/godel/lib/python3.12/collections/__init__.py'>
+- openai = <module 'openai' from '/opt/anaconda3/envs/godel/lib/python3.12/site-packages/openai/__init__.py'>
+- pprint = <module 'pprint' from '/opt/anaconda3/envs/godel/lib/python3.12/pprint.py'>
+- tasks = <module 'tasks' from '/Users/ron/src/Godel_Galaxy/src/tasks/__init__.py'>
+- Agent = <module 'agent_module.Agent' from '/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py'>
+- solver = <module 'agent_module.solver' from '/Users/ron/src/Godel_Galaxy/src/agent_module/solver.py'>
+
+Global Variables:
+- None
+
+Global Calsses:
+- None
+
+Current Agent Instance's Methods:
+- action_call_json_format_llm = <bound method Agent.action_call_json_format_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- action_call_llm = <bound method Agent.action_call_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- evolve = <bound method Agent.evolve of <agent_module.Agent.Agent object at 0x127f12930>>
+- execute_action = <bound method Agent.execute_action of <agent_module.Agent.Agent object at 0x127f12930>>
+- reinit = <bound method Agent.reinit of <agent_module.Agent.Agent object at 0x127f12930>>
+
+Current Agent Instance's Attributes:
+- action_counter = defaultdict(<class 'int'>, {})
+- action_functions = The length of your action_functions is 7.
+- client = <__main__.LatencyTrackingClient object at 0x135aa1730>
+- goal_prompt = Your goal_prompt.
+- goal_task = <tasks.task_gpqa.GPQA_Task object at 0x135a3b2f0>
+- optimize_history = The length of your optimize_history is 0.
+- rag = <rag.StructuredRAG object at 0x13559e3c0>
+
+import os
+import io
+import re
+import ast
+import sys
+import json
+import typing
+import inspect
+import functools
+import itertools
+import traceback
+import importlib
+import subprocess
+import contextlib
+import collections
+import openai
+import logic
+import pprint
+import tasks.task_gpqa as task_gpqa
+
+def solver(agent, task: str):
+    messages = [{"role": "user", "content": f"# Your Task:\n{task}"}]
+    response = agent.action_call_json_format_llm(
+        model="gpt-3.5-turbo", 
+        messages=messages, 
+        temperature=0.8, 
+        num_of_response=1,
+        role="science professor", 
+        return_dict_keys=["reasoning", "answer"], 
+        requirements=(
+            "1. Please explain step by step.\n"
+            "2. The answer MUST be either A or B or C or D.\n"
+        ).strip(), 
+    )
+    
+    return_dict = response[0]
+    return_dict["answer"] = str(return_dict.get("answer", ""))
+    return return_dict
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_gmv8iq68', 'function': {'arguments': '{}', 'name': 'action_evaluate_on_task'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_gmv8iq68', 'function': {'arguments': '{}', 'name': 'action_evaluate_on_task'}, 'type': 'function', 'index': 0}
+
+Acc: 0.28125
+tool call result:
+Error Traceback (most recent call last):
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py", line 180, in execute_action
+    result = action_functions.action_evaluate_on_task(agent.goal_task, functools.partial(solver.solver, agent))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/action_functions.py", line 291, in action_evaluate_on_task
+    if acc > tasks.task_mgsm.last_test_acc:
+             ^^^^^^^^^^^^^^^
+AttributeError: module 'tasks' has no attribute 'task_mgsm'
+
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 1, 'action_evaluate_on_task': 1, 'error_handle': 1})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '```json\n{\n  "function_name": "action_environment_aware",\n  "arguments": {}\n}\n```', 'role': 'assistant'}]
+Agent Evolve - NO TOOLS CALLED :(
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_4ypvesoh', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_4ypvesoh', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}
+
+tool call result:
+Global Functions:
+- action_display_analysis = <function action_display_analysis at 0x1054eee80>
+- action_environment_aware = <function action_environment_aware at 0x1062da2a0>
+- action_read_logic = <function action_read_logic at 0x1062da660>
+- action_adjust_logic = <function action_adjust_logic at 0x135a554e0>
+- action_run_code = <function action_run_code at 0x135a55580>
+- action_evaluate_on_task = <function action_evaluate_on_task at 0x135a55620>
+- action_print_hello = <function action_print_hello at 0x135a556c0>
+
+Global Modules:
+- os = <module 'os' (frozen)>
+- io = <module 'io' (frozen)>
+- re = <module 're' from '/opt/anaconda3/envs/godel/lib/python3.12/re/__init__.py'>
+- ast = <module 'ast' from '/opt/anaconda3/envs/godel/lib/python3.12/ast.py'>
+- sys = <module 'sys' (built-in)>
+- json = <module 'json' from '/opt/anaconda3/envs/godel/lib/python3.12/json/__init__.py'>
+- typing = <module 'typing' from '/opt/anaconda3/envs/godel/lib/python3.12/typing.py'>
+- inspect = <module 'inspect' from '/opt/anaconda3/envs/godel/lib/python3.12/inspect.py'>
+- functools = <module 'functools' from '/opt/anaconda3/envs/godel/lib/python3.12/functools.py'>
+- itertools = <module 'itertools' (built-in)>
+- traceback = <module 'traceback' from '/opt/anaconda3/envs/godel/lib/python3.12/traceback.py'>
+- importlib = <module 'importlib' from '/opt/anaconda3/envs/godel/lib/python3.12/importlib/__init__.py'>
+- subprocess = <module 'subprocess' from '/opt/anaconda3/envs/godel/lib/python3.12/subprocess.py'>
+- contextlib = <module 'contextlib' from '/opt/anaconda3/envs/godel/lib/python3.12/contextlib.py'>
+- collections = <module 'collections' from '/opt/anaconda3/envs/godel/lib/python3.12/collections/__init__.py'>
+- openai = <module 'openai' from '/opt/anaconda3/envs/godel/lib/python3.12/site-packages/openai/__init__.py'>
+- pprint = <module 'pprint' from '/opt/anaconda3/envs/godel/lib/python3.12/pprint.py'>
+- tasks = <module 'tasks' from '/Users/ron/src/Godel_Galaxy/src/tasks/__init__.py'>
+- Agent = <module 'agent_module.Agent' from '/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py'>
+- solver = <module 'agent_module.solver' from '/Users/ron/src/Godel_Galaxy/src/agent_module/solver.py'>
+
+Global Variables:
+- None
+
+Global Calsses:
+- None
+
+Current Agent Instance's Methods:
+- action_call_json_format_llm = <bound method Agent.action_call_json_format_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- action_call_llm = <bound method Agent.action_call_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- evolve = <bound method Agent.evolve of <agent_module.Agent.Agent object at 0x127f12930>>
+- execute_action = <bound method Agent.execute_action of <agent_module.Agent.Agent object at 0x127f12930>>
+- reinit = <bound method Agent.reinit of <agent_module.Agent.Agent object at 0x127f12930>>
+
+Current Agent Instance's Attributes:
+- action_counter = defaultdict(<class 'int'>, {'evolve': 3, 'action_evaluate_on_task': 1, 'error_handle': 1, 'action_environment_aware': 1})
+- action_functions = The length of your action_functions is 7.
+- client = <__main__.LatencyTrackingClient object at 0x135aa1730>
+- goal_prompt = Your goal_prompt.
+- goal_task = <tasks.task_gpqa.GPQA_Task object at 0x135a3b2f0>
+- optimize_history = The length of your optimize_history is 11.
+- rag = <rag.StructuredRAG object at 0x13559e3c0>
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 3, 'action_evaluate_on_task': 1, 'error_handle': 1, 'action_environment_aware': 1})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '```json\n{\n  "agent_methods": [\n    "action_call_json_format_llm",\n    "action_call_llm",\n    "evolve",\n    "execute_action",\n    "reinit"\n  ],\n  "global_modules": [\n    "os", "io", "re", "ast", "sys", "json", "typing", "inspect", "functools",\n    "itertools", "traceback", "importlib", "subprocess", "contextlib",\n    "collections", "openai", "pprint", "tasks", "agent_module.Agent", "agent_module.solver"\n  ]\n}\n```', 'role': 'assistant'}]
+Agent Evolve - NO TOOLS CALLED :(
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_1pha3iga', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}, {'id': 'call_5v6nrui2', 'function': {'arguments': '{"module_name":"agent","target_name":"solver"}', 'name': 'action_read_logic'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_1pha3iga', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}
+
+tool call result:
+Global Functions:
+- action_display_analysis = <function action_display_analysis at 0x1054eee80>
+- action_environment_aware = <function action_environment_aware at 0x1062da2a0>
+- action_read_logic = <function action_read_logic at 0x1062da660>
+- action_adjust_logic = <function action_adjust_logic at 0x135a554e0>
+- action_run_code = <function action_run_code at 0x135a55580>
+- action_evaluate_on_task = <function action_evaluate_on_task at 0x135a55620>
+- action_print_hello = <function action_print_hello at 0x135a556c0>
+
+Global Modules:
+- os = <module 'os' (frozen)>
+- io = <module 'io' (frozen)>
+- re = <module 're' from '/opt/anaconda3/envs/godel/lib/python3.12/re/__init__.py'>
+- ast = <module 'ast' from '/opt/anaconda3/envs/godel/lib/python3.12/ast.py'>
+- sys = <module 'sys' (built-in)>
+- json = <module 'json' from '/opt/anaconda3/envs/godel/lib/python3.12/json/__init__.py'>
+- typing = <module 'typing' from '/opt/anaconda3/envs/godel/lib/python3.12/typing.py'>
+- inspect = <module 'inspect' from '/opt/anaconda3/envs/godel/lib/python3.12/inspect.py'>
+- functools = <module 'functools' from '/opt/anaconda3/envs/godel/lib/python3.12/functools.py'>
+- itertools = <module 'itertools' (built-in)>
+- traceback = <module 'traceback' from '/opt/anaconda3/envs/godel/lib/python3.12/traceback.py'>
+- importlib = <module 'importlib' from '/opt/anaconda3/envs/godel/lib/python3.12/importlib/__init__.py'>
+- subprocess = <module 'subprocess' from '/opt/anaconda3/envs/godel/lib/python3.12/subprocess.py'>
+- contextlib = <module 'contextlib' from '/opt/anaconda3/envs/godel/lib/python3.12/contextlib.py'>
+- collections = <module 'collections' from '/opt/anaconda3/envs/godel/lib/python3.12/collections/__init__.py'>
+- openai = <module 'openai' from '/opt/anaconda3/envs/godel/lib/python3.12/site-packages/openai/__init__.py'>
+- pprint = <module 'pprint' from '/opt/anaconda3/envs/godel/lib/python3.12/pprint.py'>
+- tasks = <module 'tasks' from '/Users/ron/src/Godel_Galaxy/src/tasks/__init__.py'>
+- Agent = <module 'agent_module.Agent' from '/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py'>
+- solver = <module 'agent_module.solver' from '/Users/ron/src/Godel_Galaxy/src/agent_module/solver.py'>
+
+Global Variables:
+- None
+
+Global Calsses:
+- None
+
+Current Agent Instance's Methods:
+- action_call_json_format_llm = <bound method Agent.action_call_json_format_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- action_call_llm = <bound method Agent.action_call_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- evolve = <bound method Agent.evolve of <agent_module.Agent.Agent object at 0x127f12930>>
+- execute_action = <bound method Agent.execute_action of <agent_module.Agent.Agent object at 0x127f12930>>
+- reinit = <bound method Agent.reinit of <agent_module.Agent.Agent object at 0x127f12930>>
+
+Current Agent Instance's Attributes:
+- action_counter = defaultdict(<class 'int'>, {'evolve': 5, 'action_evaluate_on_task': 1, 'error_handle': 1, 'action_environment_aware': 2})
+- action_functions = The length of your action_functions is 7.
+- client = <__main__.LatencyTrackingClient object at 0x135aa1730>
+- goal_prompt = Your goal_prompt.
+- goal_task = <tasks.task_gpqa.GPQA_Task object at 0x135a3b2f0>
+- optimize_history = The length of your optimize_history is 11.
+- rag = <rag.StructuredRAG object at 0x13559e3c0>
+
+tool call: {'id': 'call_5v6nrui2', 'function': {'arguments': '{"module_name":"agent","target_name":"solver"}', 'name': 'action_read_logic'}, 'type': 'function', 'index': 0}
+
+tool call result:
+Error Traceback (most recent call last):
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py", line 159, in execute_action
+    result = action_functions.action_read_logic(**arguments)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/action_functions.py", line 107, in action_read_logic
+    raise e
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/action_functions.py", line 99, in action_read_logic
+    target = getattr(module, target_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'agent' has no attribute 'solver'
+
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 5, 'action_evaluate_on_task': 1, 'error_handle': 2, 'action_environment_aware': 2, 'action_read_logic': 1})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+pop item: {'role': 'tool', 'content': 'Error Traceback (most recent call last):\n  File "/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py", line 180, in execute_action\n    result = action_functions.action_evaluate_on_task(agent.goal_task, functools.partial(solver.solver, agent))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/Users/ron/src/Godel_Galaxy/src/agent_module/action_functions.py", line 291, in action_evaluate_on_task\n    if acc > tasks.task_mgsm.last_test_acc:\n             ^^^^^^^^^^^^^^^\nAttributeError: module \'tasks\' has no attribute \'task_mgsm\'\n', 'tool_call_id': 'call_gmv8iq68'}
+
+
+
+
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_hd75aimz', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_hd75aimz', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}
+
+tool call result:
+Global Functions:
+- action_display_analysis = <function action_display_analysis at 0x1054eee80>
+- action_environment_aware = <function action_environment_aware at 0x1062da2a0>
+- action_read_logic = <function action_read_logic at 0x1062da660>
+- action_adjust_logic = <function action_adjust_logic at 0x135a554e0>
+- action_run_code = <function action_run_code at 0x135a55580>
+- action_evaluate_on_task = <function action_evaluate_on_task at 0x135a55620>
+- action_print_hello = <function action_print_hello at 0x135a556c0>
+
+Global Modules:
+- os = <module 'os' (frozen)>
+- io = <module 'io' (frozen)>
+- re = <module 're' from '/opt/anaconda3/envs/godel/lib/python3.12/re/__init__.py'>
+- ast = <module 'ast' from '/opt/anaconda3/envs/godel/lib/python3.12/ast.py'>
+- sys = <module 'sys' (built-in)>
+- json = <module 'json' from '/opt/anaconda3/envs/godel/lib/python3.12/json/__init__.py'>
+- typing = <module 'typing' from '/opt/anaconda3/envs/godel/lib/python3.12/typing.py'>
+- inspect = <module 'inspect' from '/opt/anaconda3/envs/godel/lib/python3.12/inspect.py'>
+- functools = <module 'functools' from '/opt/anaconda3/envs/godel/lib/python3.12/functools.py'>
+- itertools = <module 'itertools' (built-in)>
+- traceback = <module 'traceback' from '/opt/anaconda3/envs/godel/lib/python3.12/traceback.py'>
+- importlib = <module 'importlib' from '/opt/anaconda3/envs/godel/lib/python3.12/importlib/__init__.py'>
+- subprocess = <module 'subprocess' from '/opt/anaconda3/envs/godel/lib/python3.12/subprocess.py'>
+- contextlib = <module 'contextlib' from '/opt/anaconda3/envs/godel/lib/python3.12/contextlib.py'>
+- collections = <module 'collections' from '/opt/anaconda3/envs/godel/lib/python3.12/collections/__init__.py'>
+- openai = <module 'openai' from '/opt/anaconda3/envs/godel/lib/python3.12/site-packages/openai/__init__.py'>
+- pprint = <module 'pprint' from '/opt/anaconda3/envs/godel/lib/python3.12/pprint.py'>
+- tasks = <module 'tasks' from '/Users/ron/src/Godel_Galaxy/src/tasks/__init__.py'>
+- Agent = <module 'agent_module.Agent' from '/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py'>
+- solver = <module 'agent_module.solver' from '/Users/ron/src/Godel_Galaxy/src/agent_module/solver.py'>
+
+Global Variables:
+- None
+
+Global Calsses:
+- None
+
+Current Agent Instance's Methods:
+- action_call_json_format_llm = <bound method Agent.action_call_json_format_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- action_call_llm = <bound method Agent.action_call_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- evolve = <bound method Agent.evolve of <agent_module.Agent.Agent object at 0x127f12930>>
+- execute_action = <bound method Agent.execute_action of <agent_module.Agent.Agent object at 0x127f12930>>
+- reinit = <bound method Agent.reinit of <agent_module.Agent.Agent object at 0x127f12930>>
+
+Current Agent Instance's Attributes:
+- action_counter = defaultdict(<class 'int'>, {'evolve': 6, 'action_evaluate_on_task': 1, 'error_handle': 2, 'action_environment_aware': 3, 'action_read_logic': 1})
+- action_functions = The length of your action_functions is 7.
+- client = <__main__.LatencyTrackingClient object at 0x135aa1730>
+- goal_prompt = Your goal_prompt.
+- goal_task = <tasks.task_gpqa.GPQA_Task object at 0x135a3b2f0>
+- optimize_history = The length of your optimize_history is 10.
+- rag = <rag.StructuredRAG object at 0x13559e3c0>
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 6, 'action_evaluate_on_task': 1, 'error_handle': 2, 'action_environment_aware': 3, 'action_read_logic': 1})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '```json\n{\n  "function_name": "action_environment_aware"\n}\n```', 'role': 'assistant'}]
+Agent Evolve - NO TOOLS CALLED :(
+
+------------------------------------------------------------------------------------------------------------------------
+pop item: {'role': 'tool', 'content': "Global Functions:\n- action_display_analysis = <function action_display_analysis at 0x1054eee80>\n- action_environment_aware = <function action_environment_aware at 0x1062da2a0>\n- action_read_logic = <function action_read_logic at 0x1062da660>\n- action_adjust_logic = <function action_adjust_logic at 0x135a554e0>\n- action_run_code = <function action_run_code at 0x135a55580>\n- action_evaluate_on_task = <function action_evaluate_on_task at 0x135a55620>\n- action_print_hello = <function action_print_hello at 0x135a556c0>\n\nGlobal Modules:\n- os = <module 'os' (frozen)>\n- io = <module 'io' (frozen)>\n- re = <module 're' from '/opt/anaconda3/envs/godel/lib/python3.12/re/__init__.py'>\n- ast = <module 'ast' from '/opt/anaconda3/envs/godel/lib/python3.12/ast.py'>\n- sys = <module 'sys' (built-in)>\n- json = <module 'json' from '/opt/anaconda3/envs/godel/lib/python3.12/json/__init__.py'>\n- typing = <module 'typing' from '/opt/anaconda3/envs/godel/lib/python3.12/typing.py'>\n- inspect = <module 'inspect' from '/opt/anaconda3/envs/godel/lib/python3.12/inspect.py'>\n- functools = <module 'functools' from '/opt/anaconda3/envs/godel/lib/python3.12/functools.py'>\n- itertools = <module 'itertools' (built-in)>\n- traceback = <module 'traceback' from '/opt/anaconda3/envs/godel/lib/python3.12/traceback.py'>\n- importlib = <module 'importlib' from '/opt/anaconda3/envs/godel/lib/python3.12/importlib/__init__.py'>\n- subprocess = <module 'subprocess' from '/opt/anaconda3/envs/godel/lib/python3.12/subprocess.py'>\n- contextlib = <module 'contextlib' from '/opt/anaconda3/envs/godel/lib/python3.12/contextlib.py'>\n- collections = <module 'collections' from '/opt/anaconda3/envs/godel/lib/python3.12/collections/__init__.py'>\n- openai = <module 'openai' from '/opt/anaconda3/envs/godel/lib/python3.12/site-packages/openai/__init__.py'>\n- pprint = <module 'pprint' from '/opt/anaconda3/envs/godel/lib/python3.12/pprint.py'>\n- tasks = <module 'tasks' from '/Users/ron/src/Godel_Galaxy/src/tasks/__init__.py'>\n- Agent = <module 'agent_module.Agent' from '/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py'>\n- solver = <module 'agent_module.solver' from '/Users/ron/src/Godel_Galaxy/src/agent_module/solver.py'>\n\nGlobal Variables:\n- None\n\nGlobal Calsses:\n- None\n\nCurrent Agent Instance's Methods:\n- action_call_json_format_llm = <bound method Agent.action_call_json_format_llm of <agent_module.Agent.Agent object at 0x127f12930>>\n- action_call_llm = <bound method Agent.action_call_llm of <agent_module.Agent.Agent object at 0x127f12930>>\n- evolve = <bound method Agent.evolve of <agent_module.Agent.Agent object at 0x127f12930>>\n- execute_action = <bound method Agent.execute_action of <agent_module.Agent.Agent object at 0x127f12930>>\n- reinit = <bound method Agent.reinit of <agent_module.Agent.Agent object at 0x127f12930>>\n\nCurrent Agent Instance's Attributes:\n- action_counter = defaultdict(<class 'int'>, {'evolve': 3, 'action_evaluate_on_task': 1, 'error_handle': 1, 'action_environment_aware': 1})\n- action_functions = The length of your action_functions is 7.\n- client = <__main__.LatencyTrackingClient object at 0x135aa1730>\n- goal_prompt = Your goal_prompt.\n- goal_task = <tasks.task_gpqa.GPQA_Task object at 0x135a3b2f0>\n- optimize_history = The length of your optimize_history is 11.\n- rag = <rag.StructuredRAG object at 0x13559e3c0>", 'tool_call_id': 'call_4ypvesoh'}
+
+
+
+
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_27hyp3z2', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_27hyp3z2', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}
+
+tool call result:
+Global Functions:
+- action_display_analysis = <function action_display_analysis at 0x1054eee80>
+- action_environment_aware = <function action_environment_aware at 0x1062da2a0>
+- action_read_logic = <function action_read_logic at 0x1062da660>
+- action_adjust_logic = <function action_adjust_logic at 0x135a554e0>
+- action_run_code = <function action_run_code at 0x135a55580>
+- action_evaluate_on_task = <function action_evaluate_on_task at 0x135a55620>
+- action_print_hello = <function action_print_hello at 0x135a556c0>
+
+Global Modules:
+- os = <module 'os' (frozen)>
+- io = <module 'io' (frozen)>
+- re = <module 're' from '/opt/anaconda3/envs/godel/lib/python3.12/re/__init__.py'>
+- ast = <module 'ast' from '/opt/anaconda3/envs/godel/lib/python3.12/ast.py'>
+- sys = <module 'sys' (built-in)>
+- json = <module 'json' from '/opt/anaconda3/envs/godel/lib/python3.12/json/__init__.py'>
+- typing = <module 'typing' from '/opt/anaconda3/envs/godel/lib/python3.12/typing.py'>
+- inspect = <module 'inspect' from '/opt/anaconda3/envs/godel/lib/python3.12/inspect.py'>
+- functools = <module 'functools' from '/opt/anaconda3/envs/godel/lib/python3.12/functools.py'>
+- itertools = <module 'itertools' (built-in)>
+- traceback = <module 'traceback' from '/opt/anaconda3/envs/godel/lib/python3.12/traceback.py'>
+- importlib = <module 'importlib' from '/opt/anaconda3/envs/godel/lib/python3.12/importlib/__init__.py'>
+- subprocess = <module 'subprocess' from '/opt/anaconda3/envs/godel/lib/python3.12/subprocess.py'>
+- contextlib = <module 'contextlib' from '/opt/anaconda3/envs/godel/lib/python3.12/contextlib.py'>
+- collections = <module 'collections' from '/opt/anaconda3/envs/godel/lib/python3.12/collections/__init__.py'>
+- openai = <module 'openai' from '/opt/anaconda3/envs/godel/lib/python3.12/site-packages/openai/__init__.py'>
+- pprint = <module 'pprint' from '/opt/anaconda3/envs/godel/lib/python3.12/pprint.py'>
+- tasks = <module 'tasks' from '/Users/ron/src/Godel_Galaxy/src/tasks/__init__.py'>
+- Agent = <module 'agent_module.Agent' from '/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py'>
+- solver = <module 'agent_module.solver' from '/Users/ron/src/Godel_Galaxy/src/agent_module/solver.py'>
+
+Global Variables:
+- None
+
+Global Calsses:
+- None
+
+Current Agent Instance's Methods:
+- action_call_json_format_llm = <bound method Agent.action_call_json_format_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- action_call_llm = <bound method Agent.action_call_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- evolve = <bound method Agent.evolve of <agent_module.Agent.Agent object at 0x127f12930>>
+- execute_action = <bound method Agent.execute_action of <agent_module.Agent.Agent object at 0x127f12930>>
+- reinit = <bound method Agent.reinit of <agent_module.Agent.Agent object at 0x127f12930>>
+
+Current Agent Instance's Attributes:
+- action_counter = defaultdict(<class 'int'>, {'evolve': 8, 'action_evaluate_on_task': 1, 'error_handle': 2, 'action_environment_aware': 4, 'action_read_logic': 1})
+- action_functions = The length of your action_functions is 7.
+- client = <__main__.LatencyTrackingClient object at 0x135aa1730>
+- goal_prompt = Your goal_prompt.
+- goal_task = <tasks.task_gpqa.GPQA_Task object at 0x135a3b2f0>
+- optimize_history = The length of your optimize_history is 10.
+- rag = <rag.StructuredRAG object at 0x13559e3c0>
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 8, 'action_evaluate_on_task': 1, 'error_handle': 2, 'action_environment_aware': 4, 'action_read_logic': 1})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '{\n  "function_name": "action_environment_aware",\n  "function_args": {}\n}', 'role': 'assistant'}]
+Agent Evolve - NO TOOLS CALLED :(
+
+------------------------------------------------------------------------------------------------------------------------
+pop item: {'role': 'tool', 'content': "Global Functions:\n- action_display_analysis = <function action_display_analysis at 0x1054eee80>\n- action_environment_aware = <function action_environment_aware at 0x1062da2a0>\n- action_read_logic = <function action_read_logic at 0x1062da660>\n- action_adjust_logic = <function action_adjust_logic at 0x135a554e0>\n- action_run_code = <function action_run_code at 0x135a55580>\n- action_evaluate_on_task = <function action_evaluate_on_task at 0x135a55620>\n- action_print_hello = <function action_print_hello at 0x135a556c0>\n\nGlobal Modules:\n- os = <module 'os' (frozen)>\n- io = <module 'io' (frozen)>\n- re = <module 're' from '/opt/anaconda3/envs/godel/lib/python3.12/re/__init__.py'>\n- ast = <module 'ast' from '/opt/anaconda3/envs/godel/lib/python3.12/ast.py'>\n- sys = <module 'sys' (built-in)>\n- json = <module 'json' from '/opt/anaconda3/envs/godel/lib/python3.12/json/__init__.py'>\n- typing = <module 'typing' from '/opt/anaconda3/envs/godel/lib/python3.12/typing.py'>\n- inspect = <module 'inspect' from '/opt/anaconda3/envs/godel/lib/python3.12/inspect.py'>\n- functools = <module 'functools' from '/opt/anaconda3/envs/godel/lib/python3.12/functools.py'>\n- itertools = <module 'itertools' (built-in)>\n- traceback = <module 'traceback' from '/opt/anaconda3/envs/godel/lib/python3.12/traceback.py'>\n- importlib = <module 'importlib' from '/opt/anaconda3/envs/godel/lib/python3.12/importlib/__init__.py'>\n- subprocess = <module 'subprocess' from '/opt/anaconda3/envs/godel/lib/python3.12/subprocess.py'>\n- contextlib = <module 'contextlib' from '/opt/anaconda3/envs/godel/lib/python3.12/contextlib.py'>\n- collections = <module 'collections' from '/opt/anaconda3/envs/godel/lib/python3.12/collections/__init__.py'>\n- openai = <module 'openai' from '/opt/anaconda3/envs/godel/lib/python3.12/site-packages/openai/__init__.py'>\n- pprint = <module 'pprint' from '/opt/anaconda3/envs/godel/lib/python3.12/pprint.py'>\n- tasks = <module 'tasks' from '/Users/ron/src/Godel_Galaxy/src/tasks/__init__.py'>\n- Agent = <module 'agent_module.Agent' from '/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py'>\n- solver = <module 'agent_module.solver' from '/Users/ron/src/Godel_Galaxy/src/agent_module/solver.py'>\n\nGlobal Variables:\n- None\n\nGlobal Calsses:\n- None\n\nCurrent Agent Instance's Methods:\n- action_call_json_format_llm = <bound method Agent.action_call_json_format_llm of <agent_module.Agent.Agent object at 0x127f12930>>\n- action_call_llm = <bound method Agent.action_call_llm of <agent_module.Agent.Agent object at 0x127f12930>>\n- evolve = <bound method Agent.evolve of <agent_module.Agent.Agent object at 0x127f12930>>\n- execute_action = <bound method Agent.execute_action of <agent_module.Agent.Agent object at 0x127f12930>>\n- reinit = <bound method Agent.reinit of <agent_module.Agent.Agent object at 0x127f12930>>\n\nCurrent Agent Instance's Attributes:\n- action_counter = defaultdict(<class 'int'>, {'evolve': 5, 'action_evaluate_on_task': 1, 'error_handle': 1, 'action_environment_aware': 2})\n- action_functions = The length of your action_functions is 7.\n- client = <__main__.LatencyTrackingClient object at 0x135aa1730>\n- goal_prompt = Your goal_prompt.\n- goal_task = <tasks.task_gpqa.GPQA_Task object at 0x135a3b2f0>\n- optimize_history = The length of your optimize_history is 11.\n- rag = <rag.StructuredRAG object at 0x13559e3c0>", 'tool_call_id': 'call_1pha3iga'}
+
+pop item: {'role': 'tool', 'content': 'Error Traceback (most recent call last):\n  File "/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py", line 159, in execute_action\n    result = action_functions.action_read_logic(**arguments)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/Users/ron/src/Godel_Galaxy/src/agent_module/action_functions.py", line 107, in action_read_logic\n    raise e\n  File "/Users/ron/src/Godel_Galaxy/src/agent_module/action_functions.py", line 99, in action_read_logic\n    target = getattr(module, target_name)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: module \'agent\' has no attribute \'solver\'\n', 'tool_call_id': 'call_5v6nrui2'}
+
+
+
+
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_nq8thvt6', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_nq8thvt6', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}
+
+tool call result:
+Global Functions:
+- action_display_analysis = <function action_display_analysis at 0x1054eee80>
+- action_environment_aware = <function action_environment_aware at 0x1062da2a0>
+- action_read_logic = <function action_read_logic at 0x1062da660>
+- action_adjust_logic = <function action_adjust_logic at 0x135a554e0>
+- action_run_code = <function action_run_code at 0x135a55580>
+- action_evaluate_on_task = <function action_evaluate_on_task at 0x135a55620>
+- action_print_hello = <function action_print_hello at 0x135a556c0>
+
+Global Modules:
+- os = <module 'os' (frozen)>
+- io = <module 'io' (frozen)>
+- re = <module 're' from '/opt/anaconda3/envs/godel/lib/python3.12/re/__init__.py'>
+- ast = <module 'ast' from '/opt/anaconda3/envs/godel/lib/python3.12/ast.py'>
+- sys = <module 'sys' (built-in)>
+- json = <module 'json' from '/opt/anaconda3/envs/godel/lib/python3.12/json/__init__.py'>
+- typing = <module 'typing' from '/opt/anaconda3/envs/godel/lib/python3.12/typing.py'>
+- inspect = <module 'inspect' from '/opt/anaconda3/envs/godel/lib/python3.12/inspect.py'>
+- functools = <module 'functools' from '/opt/anaconda3/envs/godel/lib/python3.12/functools.py'>
+- itertools = <module 'itertools' (built-in)>
+- traceback = <module 'traceback' from '/opt/anaconda3/envs/godel/lib/python3.12/traceback.py'>
+- importlib = <module 'importlib' from '/opt/anaconda3/envs/godel/lib/python3.12/importlib/__init__.py'>
+- subprocess = <module 'subprocess' from '/opt/anaconda3/envs/godel/lib/python3.12/subprocess.py'>
+- contextlib = <module 'contextlib' from '/opt/anaconda3/envs/godel/lib/python3.12/contextlib.py'>
+- collections = <module 'collections' from '/opt/anaconda3/envs/godel/lib/python3.12/collections/__init__.py'>
+- openai = <module 'openai' from '/opt/anaconda3/envs/godel/lib/python3.12/site-packages/openai/__init__.py'>
+- pprint = <module 'pprint' from '/opt/anaconda3/envs/godel/lib/python3.12/pprint.py'>
+- tasks = <module 'tasks' from '/Users/ron/src/Godel_Galaxy/src/tasks/__init__.py'>
+- Agent = <module 'agent_module.Agent' from '/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py'>
+- solver = <module 'agent_module.solver' from '/Users/ron/src/Godel_Galaxy/src/agent_module/solver.py'>
+
+Global Variables:
+- None
+
+Global Calsses:
+- None
+
+Current Agent Instance's Methods:
+- action_call_json_format_llm = <bound method Agent.action_call_json_format_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- action_call_llm = <bound method Agent.action_call_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- evolve = <bound method Agent.evolve of <agent_module.Agent.Agent object at 0x127f12930>>
+- execute_action = <bound method Agent.execute_action of <agent_module.Agent.Agent object at 0x127f12930>>
+- reinit = <bound method Agent.reinit of <agent_module.Agent.Agent object at 0x127f12930>>
+
+Current Agent Instance's Attributes:
+- action_counter = defaultdict(<class 'int'>, {'evolve': 10, 'action_evaluate_on_task': 1, 'error_handle': 2, 'action_environment_aware': 5, 'action_read_logic': 1})
+- action_functions = The length of your action_functions is 7.
+- client = <__main__.LatencyTrackingClient object at 0x135aa1730>
+- goal_prompt = Your goal_prompt.
+- goal_task = <tasks.task_gpqa.GPQA_Task object at 0x135a3b2f0>
+- optimize_history = The length of your optimize_history is 9.
+- rag = <rag.StructuredRAG object at 0x13559e3c0>
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 10, 'action_evaluate_on_task': 1, 'error_handle': 2, 'action_environment_aware': 5, 'action_read_logic': 1})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '```json\n{\n  "function_name": "action_environment_aware",\n  "function_args": {}\n}\n```', 'role': 'assistant'}]
+Agent Evolve - NO TOOLS CALLED :(
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_mgd05u9s', 'function': {'arguments': '{}', 'name': 'action_evaluate_on_task'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_mgd05u9s', 'function': {'arguments': '{}', 'name': 'action_evaluate_on_task'}, 'type': 'function', 'index': 0}
+
+Found dynamic Ollama process: 59164
+Acc: 0.1875
+tool call result:
+Error Traceback (most recent call last):
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py", line 180, in execute_action
+    result = action_functions.action_evaluate_on_task(agent.goal_task, functools.partial(solver.solver, agent))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/action_functions.py", line 291, in action_evaluate_on_task
+    if acc > tasks.task_mgsm.last_test_acc:
+             ^^^^^^^^^^^^^^^
+AttributeError: module 'tasks' has no attribute 'task_mgsm'
+
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 12, 'action_evaluate_on_task': 2, 'error_handle': 3, 'action_environment_aware': 5, 'action_read_logic': 1})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+Found dynamic Ollama process: 61020
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_wyt0op9s', 'function': {'arguments': '{"module_name":"tasks","target_name":"task_mgsm.last_test_acc"}', 'name': 'action_evaluate_on_task'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_wyt0op9s', 'function': {'arguments': '{"module_name":"tasks","target_name":"task_mgsm.last_test_acc"}', 'name': 'action_evaluate_on_task'}, 'type': 'function', 'index': 0}
+
+Found dynamic Ollama process: 61129
+Acc: 0.3125
+Found dynamic Ollama process: 65961
+95% Bootstrap Confidence Interval: (17.5%, 30.1%), Median: 23.5%
+tool call result:
+Error Traceback (most recent call last):
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py", line 180, in execute_action
+    result = action_functions.action_evaluate_on_task(agent.goal_task, functools.partial(solver.solver, agent))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/action_functions.py", line 291, in action_evaluate_on_task
+    if acc > tasks.task_mgsm.last_test_acc:
+             ^^^^^^^^^^^^^^^
+AttributeError: module 'tasks' has no attribute 'task_mgsm'
+
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 13, 'action_evaluate_on_task': 3, 'error_handle': 4, 'action_environment_aware': 5, 'action_read_logic': 1})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+Found dynamic Ollama process: 66620
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_doe2p7vp', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_doe2p7vp', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}
+
+tool call result:
+Global Functions:
+- action_display_analysis = <function action_display_analysis at 0x1054eee80>
+- action_environment_aware = <function action_environment_aware at 0x1062da2a0>
+- action_read_logic = <function action_read_logic at 0x1062da660>
+- action_adjust_logic = <function action_adjust_logic at 0x135a554e0>
+- action_run_code = <function action_run_code at 0x135a55580>
+- action_evaluate_on_task = <function action_evaluate_on_task at 0x135a55620>
+- action_print_hello = <function action_print_hello at 0x135a556c0>
+
+Global Modules:
+- os = <module 'os' (frozen)>
+- io = <module 'io' (frozen)>
+- re = <module 're' from '/opt/anaconda3/envs/godel/lib/python3.12/re/__init__.py'>
+- ast = <module 'ast' from '/opt/anaconda3/envs/godel/lib/python3.12/ast.py'>
+- sys = <module 'sys' (built-in)>
+- json = <module 'json' from '/opt/anaconda3/envs/godel/lib/python3.12/json/__init__.py'>
+- typing = <module 'typing' from '/opt/anaconda3/envs/godel/lib/python3.12/typing.py'>
+- inspect = <module 'inspect' from '/opt/anaconda3/envs/godel/lib/python3.12/inspect.py'>
+- functools = <module 'functools' from '/opt/anaconda3/envs/godel/lib/python3.12/functools.py'>
+- itertools = <module 'itertools' (built-in)>
+- traceback = <module 'traceback' from '/opt/anaconda3/envs/godel/lib/python3.12/traceback.py'>
+- importlib = <module 'importlib' from '/opt/anaconda3/envs/godel/lib/python3.12/importlib/__init__.py'>
+- subprocess = <module 'subprocess' from '/opt/anaconda3/envs/godel/lib/python3.12/subprocess.py'>
+- contextlib = <module 'contextlib' from '/opt/anaconda3/envs/godel/lib/python3.12/contextlib.py'>
+- collections = <module 'collections' from '/opt/anaconda3/envs/godel/lib/python3.12/collections/__init__.py'>
+- openai = <module 'openai' from '/opt/anaconda3/envs/godel/lib/python3.12/site-packages/openai/__init__.py'>
+- pprint = <module 'pprint' from '/opt/anaconda3/envs/godel/lib/python3.12/pprint.py'>
+- tasks = <module 'tasks' from '/Users/ron/src/Godel_Galaxy/src/tasks/__init__.py'>
+- Agent = <module 'agent_module.Agent' from '/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py'>
+- solver = <module 'agent_module.solver' from '/Users/ron/src/Godel_Galaxy/src/agent_module/solver.py'>
+
+Global Variables:
+- None
+
+Global Calsses:
+- None
+
+Current Agent Instance's Methods:
+- action_call_json_format_llm = <bound method Agent.action_call_json_format_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- action_call_llm = <bound method Agent.action_call_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- evolve = <bound method Agent.evolve of <agent_module.Agent.Agent object at 0x127f12930>>
+- execute_action = <bound method Agent.execute_action of <agent_module.Agent.Agent object at 0x127f12930>>
+- reinit = <bound method Agent.reinit of <agent_module.Agent.Agent object at 0x127f12930>>
+
+Current Agent Instance's Attributes:
+- action_counter = defaultdict(<class 'int'>, {'evolve': 14, 'action_evaluate_on_task': 3, 'error_handle': 4, 'action_environment_aware': 6, 'action_read_logic': 1})
+- action_functions = The length of your action_functions is 7.
+- client = <__main__.LatencyTrackingClient object at 0x135aa1730>
+- goal_prompt = Your goal_prompt.
+- goal_task = <tasks.task_gpqa.GPQA_Task object at 0x135a3b2f0>
+- optimize_history = The length of your optimize_history is 11.
+- rag = <rag.StructuredRAG object at 0x13559e3c0>
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 14, 'action_evaluate_on_task': 3, 'error_handle': 4, 'action_environment_aware': 6, 'action_read_logic': 1})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '```json\n{\n  "response": {\n    "action": "action_environment_aware",\n    "parameters": {}\n  }\n}\n```', 'role': 'assistant'}]
+Agent Evolve - NO TOOLS CALLED :(
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '<tools>\n    <tool name="action_environment_aware" />\n</tools>', 'role': 'assistant'}]
+Agent Evolve - NO TOOLS CALLED :(
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_4ldhyzzt', 'function': {'arguments': '{"module_name":"agent","target_name":"Agent.solver"}', 'name': 'action_read_logic'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_4ldhyzzt', 'function': {'arguments': '{"module_name":"agent","target_name":"Agent.solver"}', 'name': 'action_read_logic'}, 'type': 'function', 'index': 0}
+
+tool call result:
+Error Traceback (most recent call last):
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py", line 159, in execute_action
+    result = action_functions.action_read_logic(**arguments)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/action_functions.py", line 107, in action_read_logic
+    raise e
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/action_functions.py", line 95, in action_read_logic
+    target_class = getattr(module, class_name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'agent' has no attribute 'Agent'
+
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 17, 'action_evaluate_on_task': 3, 'error_handle': 5, 'action_environment_aware': 6, 'action_read_logic': 2})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_m6h8i3xd', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_m6h8i3xd', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}
+
+tool call result:
+Global Functions:
+- action_display_analysis = <function action_display_analysis at 0x1054eee80>
+- action_environment_aware = <function action_environment_aware at 0x1062da2a0>
+- action_read_logic = <function action_read_logic at 0x1062da660>
+- action_adjust_logic = <function action_adjust_logic at 0x135a554e0>
+- action_run_code = <function action_run_code at 0x135a55580>
+- action_evaluate_on_task = <function action_evaluate_on_task at 0x135a55620>
+- action_print_hello = <function action_print_hello at 0x135a556c0>
+
+Global Modules:
+- os = <module 'os' (frozen)>
+- io = <module 'io' (frozen)>
+- re = <module 're' from '/opt/anaconda3/envs/godel/lib/python3.12/re/__init__.py'>
+- ast = <module 'ast' from '/opt/anaconda3/envs/godel/lib/python3.12/ast.py'>
+- sys = <module 'sys' (built-in)>
+- json = <module 'json' from '/opt/anaconda3/envs/godel/lib/python3.12/json/__init__.py'>
+- typing = <module 'typing' from '/opt/anaconda3/envs/godel/lib/python3.12/typing.py'>
+- inspect = <module 'inspect' from '/opt/anaconda3/envs/godel/lib/python3.12/inspect.py'>
+- functools = <module 'functools' from '/opt/anaconda3/envs/godel/lib/python3.12/functools.py'>
+- itertools = <module 'itertools' (built-in)>
+- traceback = <module 'traceback' from '/opt/anaconda3/envs/godel/lib/python3.12/traceback.py'>
+- importlib = <module 'importlib' from '/opt/anaconda3/envs/godel/lib/python3.12/importlib/__init__.py'>
+- subprocess = <module 'subprocess' from '/opt/anaconda3/envs/godel/lib/python3.12/subprocess.py'>
+- contextlib = <module 'contextlib' from '/opt/anaconda3/envs/godel/lib/python3.12/contextlib.py'>
+- collections = <module 'collections' from '/opt/anaconda3/envs/godel/lib/python3.12/collections/__init__.py'>
+- openai = <module 'openai' from '/opt/anaconda3/envs/godel/lib/python3.12/site-packages/openai/__init__.py'>
+- pprint = <module 'pprint' from '/opt/anaconda3/envs/godel/lib/python3.12/pprint.py'>
+- tasks = <module 'tasks' from '/Users/ron/src/Godel_Galaxy/src/tasks/__init__.py'>
+- Agent = <module 'agent_module.Agent' from '/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py'>
+- solver = <module 'agent_module.solver' from '/Users/ron/src/Godel_Galaxy/src/agent_module/solver.py'>
+
+Global Variables:
+- None
+
+Global Calsses:
+- None
+
+Current Agent Instance's Methods:
+- action_call_json_format_llm = <bound method Agent.action_call_json_format_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- action_call_llm = <bound method Agent.action_call_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- evolve = <bound method Agent.evolve of <agent_module.Agent.Agent object at 0x127f12930>>
+- execute_action = <bound method Agent.execute_action of <agent_module.Agent.Agent object at 0x127f12930>>
+- reinit = <bound method Agent.reinit of <agent_module.Agent.Agent object at 0x127f12930>>
+
+Current Agent Instance's Attributes:
+- action_counter = defaultdict(<class 'int'>, {'evolve': 18, 'action_evaluate_on_task': 3, 'error_handle': 5, 'action_environment_aware': 7, 'action_read_logic': 2})
+- action_functions = The length of your action_functions is 7.
+- client = <__main__.LatencyTrackingClient object at 0x135aa1730>
+- goal_prompt = Your goal_prompt.
+- goal_task = <tasks.task_gpqa.GPQA_Task object at 0x135a3b2f0>
+- optimize_history = The length of your optimize_history is 11.
+- rag = <rag.StructuredRAG object at 0x13559e3c0>
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 18, 'action_evaluate_on_task': 3, 'error_handle': 5, 'action_environment_aware': 7, 'action_read_logic': 2})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '```json\n{\n  "action": "action_environment_aware",\n  "parameters": {}\n}\n```', 'role': 'assistant'}]
+Agent Evolve - NO TOOLS CALLED :(
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_ljyv7oq8', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_ljyv7oq8', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}
+
+tool call result:
+Global Functions:
+- action_display_analysis = <function action_display_analysis at 0x1054eee80>
+- action_environment_aware = <function action_environment_aware at 0x1062da2a0>
+- action_read_logic = <function action_read_logic at 0x1062da660>
+- action_adjust_logic = <function action_adjust_logic at 0x135a554e0>
+- action_run_code = <function action_run_code at 0x135a55580>
+- action_evaluate_on_task = <function action_evaluate_on_task at 0x135a55620>
+- action_print_hello = <function action_print_hello at 0x135a556c0>
+
+Global Modules:
+- os = <module 'os' (frozen)>
+- io = <module 'io' (frozen)>
+- re = <module 're' from '/opt/anaconda3/envs/godel/lib/python3.12/re/__init__.py'>
+- ast = <module 'ast' from '/opt/anaconda3/envs/godel/lib/python3.12/ast.py'>
+- sys = <module 'sys' (built-in)>
+- json = <module 'json' from '/opt/anaconda3/envs/godel/lib/python3.12/json/__init__.py'>
+- typing = <module 'typing' from '/opt/anaconda3/envs/godel/lib/python3.12/typing.py'>
+- inspect = <module 'inspect' from '/opt/anaconda3/envs/godel/lib/python3.12/inspect.py'>
+- functools = <module 'functools' from '/opt/anaconda3/envs/godel/lib/python3.12/functools.py'>
+- itertools = <module 'itertools' (built-in)>
+- traceback = <module 'traceback' from '/opt/anaconda3/envs/godel/lib/python3.12/traceback.py'>
+- importlib = <module 'importlib' from '/opt/anaconda3/envs/godel/lib/python3.12/importlib/__init__.py'>
+- subprocess = <module 'subprocess' from '/opt/anaconda3/envs/godel/lib/python3.12/subprocess.py'>
+- contextlib = <module 'contextlib' from '/opt/anaconda3/envs/godel/lib/python3.12/contextlib.py'>
+- collections = <module 'collections' from '/opt/anaconda3/envs/godel/lib/python3.12/collections/__init__.py'>
+- openai = <module 'openai' from '/opt/anaconda3/envs/godel/lib/python3.12/site-packages/openai/__init__.py'>
+- pprint = <module 'pprint' from '/opt/anaconda3/envs/godel/lib/python3.12/pprint.py'>
+- tasks = <module 'tasks' from '/Users/ron/src/Godel_Galaxy/src/tasks/__init__.py'>
+- Agent = <module 'agent_module.Agent' from '/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py'>
+- solver = <module 'agent_module.solver' from '/Users/ron/src/Godel_Galaxy/src/agent_module/solver.py'>
+
+Global Variables:
+- None
+
+Global Calsses:
+- None
+
+Current Agent Instance's Methods:
+- action_call_json_format_llm = <bound method Agent.action_call_json_format_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- action_call_llm = <bound method Agent.action_call_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- evolve = <bound method Agent.evolve of <agent_module.Agent.Agent object at 0x127f12930>>
+- execute_action = <bound method Agent.execute_action of <agent_module.Agent.Agent object at 0x127f12930>>
+- reinit = <bound method Agent.reinit of <agent_module.Agent.Agent object at 0x127f12930>>
+
+Current Agent Instance's Attributes:
+- action_counter = defaultdict(<class 'int'>, {'evolve': 20, 'action_evaluate_on_task': 3, 'error_handle': 5, 'action_environment_aware': 8, 'action_read_logic': 2})
+- action_functions = The length of your action_functions is 7.
+- client = <__main__.LatencyTrackingClient object at 0x135aa1730>
+- goal_prompt = Your goal_prompt.
+- goal_task = <tasks.task_gpqa.GPQA_Task object at 0x135a3b2f0>
+- optimize_history = The length of your optimize_history is 11.
+- rag = <rag.StructuredRAG object at 0x13559e3c0>
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 20, 'action_evaluate_on_task': 3, 'error_handle': 5, 'action_environment_aware': 8, 'action_read_logic': 2})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '```json\n{\n  "action": "action_environment_aware",\n  "parameters": {}\n}\n```', 'role': 'assistant'}]
+Agent Evolve - NO TOOLS CALLED :(
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '<xml>\n    <function name="action_environment_aware" arguments={}></function>\n</xml>', 'role': 'assistant'}]
+Agent Evolve - NO TOOLS CALLED :(
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_qgazfvli', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_qgazfvli', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}
+
+tool call result:
+Global Functions:
+- action_display_analysis = <function action_display_analysis at 0x1054eee80>
+- action_environment_aware = <function action_environment_aware at 0x1062da2a0>
+- action_read_logic = <function action_read_logic at 0x1062da660>
+- action_adjust_logic = <function action_adjust_logic at 0x135a554e0>
+- action_run_code = <function action_run_code at 0x135a55580>
+- action_evaluate_on_task = <function action_evaluate_on_task at 0x135a55620>
+- action_print_hello = <function action_print_hello at 0x135a556c0>
+
+Global Modules:
+- os = <module 'os' (frozen)>
+- io = <module 'io' (frozen)>
+- re = <module 're' from '/opt/anaconda3/envs/godel/lib/python3.12/re/__init__.py'>
+- ast = <module 'ast' from '/opt/anaconda3/envs/godel/lib/python3.12/ast.py'>
+- sys = <module 'sys' (built-in)>
+- json = <module 'json' from '/opt/anaconda3/envs/godel/lib/python3.12/json/__init__.py'>
+- typing = <module 'typing' from '/opt/anaconda3/envs/godel/lib/python3.12/typing.py'>
+- inspect = <module 'inspect' from '/opt/anaconda3/envs/godel/lib/python3.12/inspect.py'>
+- functools = <module 'functools' from '/opt/anaconda3/envs/godel/lib/python3.12/functools.py'>
+- itertools = <module 'itertools' (built-in)>
+- traceback = <module 'traceback' from '/opt/anaconda3/envs/godel/lib/python3.12/traceback.py'>
+- importlib = <module 'importlib' from '/opt/anaconda3/envs/godel/lib/python3.12/importlib/__init__.py'>
+- subprocess = <module 'subprocess' from '/opt/anaconda3/envs/godel/lib/python3.12/subprocess.py'>
+- contextlib = <module 'contextlib' from '/opt/anaconda3/envs/godel/lib/python3.12/contextlib.py'>
+- collections = <module 'collections' from '/opt/anaconda3/envs/godel/lib/python3.12/collections/__init__.py'>
+- openai = <module 'openai' from '/opt/anaconda3/envs/godel/lib/python3.12/site-packages/openai/__init__.py'>
+- pprint = <module 'pprint' from '/opt/anaconda3/envs/godel/lib/python3.12/pprint.py'>
+- tasks = <module 'tasks' from '/Users/ron/src/Godel_Galaxy/src/tasks/__init__.py'>
+- Agent = <module 'agent_module.Agent' from '/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py'>
+- solver = <module 'agent_module.solver' from '/Users/ron/src/Godel_Galaxy/src/agent_module/solver.py'>
+
+Global Variables:
+- None
+
+Global Calsses:
+- None
+
+Current Agent Instance's Methods:
+- action_call_json_format_llm = <bound method Agent.action_call_json_format_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- action_call_llm = <bound method Agent.action_call_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- evolve = <bound method Agent.evolve of <agent_module.Agent.Agent object at 0x127f12930>>
+- execute_action = <bound method Agent.execute_action of <agent_module.Agent.Agent object at 0x127f12930>>
+- reinit = <bound method Agent.reinit of <agent_module.Agent.Agent object at 0x127f12930>>
+
+Current Agent Instance's Attributes:
+- action_counter = defaultdict(<class 'int'>, {'evolve': 23, 'action_evaluate_on_task': 3, 'error_handle': 5, 'action_environment_aware': 9, 'action_read_logic': 2})
+- action_functions = The length of your action_functions is 7.
+- client = <__main__.LatencyTrackingClient object at 0x135aa1730>
+- goal_prompt = Your goal_prompt.
+- goal_task = <tasks.task_gpqa.GPQA_Task object at 0x135a3b2f0>
+- optimize_history = The length of your optimize_history is 11.
+- rag = <rag.StructuredRAG object at 0x13559e3c0>
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 23, 'action_evaluate_on_task': 3, 'error_handle': 5, 'action_environment_aware': 9, 'action_read_logic': 2})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '```json\n{\n    "response": {\n        "action": "action_environment_aware",\n        "parameters": {}\n    }\n}\n```', 'role': 'assistant'}]
+Agent Evolve - NO TOOLS CALLED :(
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_n5ejgyqn', 'function': {'arguments': '{"module_name":"agent.py","target_name":"solver"}', 'name': 'action_read_logic'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_n5ejgyqn', 'function': {'arguments': '{"module_name":"agent.py","target_name":"solver"}', 'name': 'action_read_logic'}, 'type': 'function', 'index': 0}
+
+tool call result:
+Error Traceback (most recent call last):
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py", line 159, in execute_action
+    result = action_functions.action_read_logic(**arguments)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/action_functions.py", line 107, in action_read_logic
+    raise e
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/action_functions.py", line 90, in action_read_logic
+    module = importlib.import_module(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/godel/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1319, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'agent.py'; 'agent' is not a package
+
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 25, 'action_evaluate_on_task': 3, 'error_handle': 6, 'action_environment_aware': 9, 'action_read_logic': 3})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_s38ww4t6', 'function': {'arguments': '{"module_name":"agent_module.Agent","target_name":"Agent.action_call_llm"}', 'name': 'action_read_logic'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_s38ww4t6', 'function': {'arguments': '{"module_name":"agent_module.Agent","target_name":"Agent.action_call_llm"}', 'name': 'action_read_logic'}, 'type': 'function', 'index': 0}
+
+tool call result:
+    def action_call_llm(
+        agent, 
+        *,
+        model: typing.Literal["gpt-3.5-turbo", "gpt-4o-mini", "gpt-4o"] = "gpt-4o-mini", 
+        messages: typing.List[typing.Dict[str, str]], 
+        temperature: float = 1.0, 
+        max_completion_tokens: int = 4096, 
+        n: int = 1,
+        response_format: typing.Literal["text", "json", "json_object"] = "text", 
+        tools=None, 
+        context=False
+    ):
+        """
+        Sends a request to the OpenAI LLM with a system prompt and user message, and returns the response.
+
+        Args:
+            agent (Agent): The OpenAI client instance used to interact with the LLM.
+            messages (List[Dict[str, str]]): A list of message dictionaries (conversation history).
+            response_format (str): The desired format of the LLM's output.
+            model (str): Specifies which LLM model to use.
+            temperature (float): A float value controlling the randomness of the model's responses. Higher values (e.g., 1.0) increase creativity, while lower values (e.g., 0.1) make the responses more focused and deterministic.
+            max_completion_tokens: An integer defining the maximum number of tokens in the completion response, up to 4096.
+            n (int): The number of chat completion choices to generate for each input message.
+
+        Returns:
+            response (dict): The response from the OpenAI LLM.
+        """
+        try:
+            if response_format == "json":
+                response_format = "json_object"
+            
+            import copy
+            messages = copy.deepcopy(messages)
+            for message in messages:
+                message["content"] = str(message["content"])
+            
+            kwargs = {
+                "n": n,
+                "model": model,
+                "messages": messages,
+                "response_format": {"type": response_format if response_format == "json_object" else "text"}, 
+                "temperature": temperature,
+                "max_completion_tokens": max_completion_tokens
+            }
+
+            if tools is not None:
+                kwargs["tools"] = tools
+                # kwargs["tool_choice"] = tool_choice # NOTE: this does nothing with Ollama right now
+
+            if context:
+                ctx = agent.rag.get_context(messages[-1]["content"], k=1)
+                messages.insert(2, {"role": "system",  "name": "context", "content": "**Use the following context about the system to inform your next tool calls:**\n" + ctx})
+
+                # print("Messages:")
+                # pprint.pp(messages[2:])
+                print("\n\n")
+
+            response = agent.client.chat.completions.create(**kwargs).to_dict() # to Python dictionary
+            
+            def try_parse_json(content):
+                try:
+                    return json.loads(content)
+                except:
+                    return {"JSONDecodeError": content}
+
+            if response_format == "text":
+                return [choice["message"] for choice in response["choices"]]
+            else:
+                return [try_parse_json(choice["message"]["content"]) for choice in response["choices"]]
+        except Exception as e:
+            raise e
+
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 26, 'action_evaluate_on_task': 3, 'error_handle': 6, 'action_environment_aware': 9, 'action_read_logic': 4})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '```json\n{\n  "function_name": "action_call_json_format_llm",\n  "arguments": {\n    "model": "gpt-4o-mini",\n    "messages": [],\n    "temperature": 1.0,\n    "role": "system",\n    "return_dict_keys": ["response"],\n    "requirements": "Please respond with a JSON object containing the response from the LLM."\n  }\n}\n```', 'role': 'assistant'}]
+Agent Evolve - NO TOOLS CALLED :(
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_jw7osbux', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_jw7osbux', 'function': {'arguments': '{}', 'name': 'action_environment_aware'}, 'type': 'function', 'index': 0}
+
+tool call result:
+Global Functions:
+- action_display_analysis = <function action_display_analysis at 0x1054eee80>
+- action_environment_aware = <function action_environment_aware at 0x1062da2a0>
+- action_read_logic = <function action_read_logic at 0x1062da660>
+- action_adjust_logic = <function action_adjust_logic at 0x135a554e0>
+- action_run_code = <function action_run_code at 0x135a55580>
+- action_evaluate_on_task = <function action_evaluate_on_task at 0x135a55620>
+- action_print_hello = <function action_print_hello at 0x135a556c0>
+
+Global Modules:
+- os = <module 'os' (frozen)>
+- io = <module 'io' (frozen)>
+- re = <module 're' from '/opt/anaconda3/envs/godel/lib/python3.12/re/__init__.py'>
+- ast = <module 'ast' from '/opt/anaconda3/envs/godel/lib/python3.12/ast.py'>
+- sys = <module 'sys' (built-in)>
+- json = <module 'json' from '/opt/anaconda3/envs/godel/lib/python3.12/json/__init__.py'>
+- typing = <module 'typing' from '/opt/anaconda3/envs/godel/lib/python3.12/typing.py'>
+- inspect = <module 'inspect' from '/opt/anaconda3/envs/godel/lib/python3.12/inspect.py'>
+- functools = <module 'functools' from '/opt/anaconda3/envs/godel/lib/python3.12/functools.py'>
+- itertools = <module 'itertools' (built-in)>
+- traceback = <module 'traceback' from '/opt/anaconda3/envs/godel/lib/python3.12/traceback.py'>
+- importlib = <module 'importlib' from '/opt/anaconda3/envs/godel/lib/python3.12/importlib/__init__.py'>
+- subprocess = <module 'subprocess' from '/opt/anaconda3/envs/godel/lib/python3.12/subprocess.py'>
+- contextlib = <module 'contextlib' from '/opt/anaconda3/envs/godel/lib/python3.12/contextlib.py'>
+- collections = <module 'collections' from '/opt/anaconda3/envs/godel/lib/python3.12/collections/__init__.py'>
+- openai = <module 'openai' from '/opt/anaconda3/envs/godel/lib/python3.12/site-packages/openai/__init__.py'>
+- pprint = <module 'pprint' from '/opt/anaconda3/envs/godel/lib/python3.12/pprint.py'>
+- tasks = <module 'tasks' from '/Users/ron/src/Godel_Galaxy/src/tasks/__init__.py'>
+- Agent = <module 'agent_module.Agent' from '/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py'>
+- solver = <module 'agent_module.solver' from '/Users/ron/src/Godel_Galaxy/src/agent_module/solver.py'>
+
+Global Variables:
+- None
+
+Global Calsses:
+- None
+
+Current Agent Instance's Methods:
+- action_call_json_format_llm = <bound method Agent.action_call_json_format_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- action_call_llm = <bound method Agent.action_call_llm of <agent_module.Agent.Agent object at 0x127f12930>>
+- evolve = <bound method Agent.evolve of <agent_module.Agent.Agent object at 0x127f12930>>
+- execute_action = <bound method Agent.execute_action of <agent_module.Agent.Agent object at 0x127f12930>>
+- reinit = <bound method Agent.reinit of <agent_module.Agent.Agent object at 0x127f12930>>
+
+Current Agent Instance's Attributes:
+- action_counter = defaultdict(<class 'int'>, {'evolve': 28, 'action_evaluate_on_task': 3, 'error_handle': 6, 'action_environment_aware': 10, 'action_read_logic': 4})
+- action_functions = The length of your action_functions is 7.
+- client = <__main__.LatencyTrackingClient object at 0x135aa1730>
+- goal_prompt = Your goal_prompt.
+- goal_task = <tasks.task_gpqa.GPQA_Task object at 0x135a3b2f0>
+- optimize_history = The length of your optimize_history is 11.
+- rag = <rag.StructuredRAG object at 0x13559e3c0>
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 28, 'action_evaluate_on_task': 3, 'error_handle': 6, 'action_environment_aware': 10, 'action_read_logic': 4})
+
+Agent Evolve
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '```json\n{\n  "action": "action_environment_aware",\n  "analysis": {\n    "message": "The environment aware function has been called. It provides information about the global functions, modules, variables, and classes available in the current context."\n  }\n}\n```', 'role': 'assistant'}]
+Agent Evolve - NO TOOLS CALLED :(
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+[{'content': '', 'role': 'assistant', 'tool_calls': [{'id': 'call_8s5mds2v', 'function': {'arguments': '{}', 'name': 'action_evaluate_on_task'}, 'type': 'function', 'index': 0}]}]
+tool call: {'id': 'call_8s5mds2v', 'function': {'arguments': '{}', 'name': 'action_evaluate_on_task'}, 'type': 'function', 'index': 0}
+
+Acc: 0.3125
+Found dynamic Ollama process: 67784
+95% Bootstrap Confidence Interval: (14.5%, 26.5%), Median: 20.5%
+tool call result:
+Error Traceback (most recent call last):
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/Agent.py", line 180, in execute_action
+    result = action_functions.action_evaluate_on_task(agent.goal_task, functools.partial(solver.solver, agent))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ron/src/Godel_Galaxy/src/agent_module/action_functions.py", line 291, in action_evaluate_on_task
+    if acc > tasks.task_mgsm.last_test_acc:
+             ^^^^^^^^^^^^^^^
+AttributeError: module 'tasks' has no attribute 'task_mgsm'
+
+
+Action Counter: defaultdict(<class 'int'>, {'evolve': 30, 'action_evaluate_on_task': 4, 'error_handle': 7, 'action_environment_aware': 10, 'action_read_logic': 4})
+
+{
+    "summary": {
+        "start_time": "2024-12-09 11:21:25",
+        "end_time": "2024-12-09 12:39:53",
+        "total_duration": {
+            "value": 4708.659014,
+            "unit": "seconds"
+        }
+    },
+    "details": {
+        "agent": {
+            "peak_memory": {
+                "value": 133.625,
+                "unit": "MB"
+            },
+            "avg_cpu": {
+                "value": 0.4941098802730223,
+                "unit": "%"
+            }
+        },
+        "main_ollama": {
+            "peak_memory": {
+                "value": 141.265625,
+                "unit": "MB"
+            },
+            "avg_cpu": {
+                "value": 0.7438580792376008,
+                "unit": "%"
+            }
+        },
+        "dynamic_ollama": {
+            "peak_memory": {
+                "value": 1326.84375,
+                "unit": "MB"
+            },
+            "avg_cpu": {
+                "value": 2.334710410885328,
+                "unit": "%"
+            }
+        },
+        "latency": {
+            "average": {
+                "value": 219502.37140752832,
+                "unit": "ms"
+            },
+            "min": {
+                "value": 10046.783924102783,
+                "unit": "ms"
+            },
+            "max": {
+                "value": 805343.7201976776,
+                "unit": "ms"
+            }
+        }
+    }
+}
+Results saved to ollama_resource_tracking.json
